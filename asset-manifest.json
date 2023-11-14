@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3346f80a.css",
-    "main.js": "/static/js/main.d7787ac9.js",
+    "main.css": "/static/css/main.4d7d5968.css",
+    "main.js": "/static/js/main.ebc30448.js",
     "static/media/facP.pdf": "/static/media/facP.09123cba2138eb29f8c5.pdf",
     "static/media/302.pdf": "/static/media/302.15516ee637a067abe9e9.pdf",
     "static/media/classroom.png": "/static/media/classroom.bff73a3bbef2a4e55390.png",
@@ -12,8 +12,6 @@
     "static/media/slides.pdf": "/static/media/slides.4732b3bb0ad3c579e36b.pdf",
     "static/media/mlsReport.pdf": "/static/media/mlsReport.e23511b5c8cca1cd8309.pdf",
     "static/media/poster.PNG": "/static/media/poster.0ace50b1c22ace887eb2.PNG",
-    "static/media/event.jpg": "/static/media/event.f937f7e570e14d61b521.jpg",
-    "static/media/gingerHouse.jpg": "/static/media/gingerHouse.b714d833ca7405c421cc.jpg",
     "static/media/profile-photo.png": "/static/media/profile-photo.28cb9765a0b66e313e09.png",
     "static/media/mingar.pdf": "/static/media/mingar.0ff9002c31298b8a1982.pdf",
     "static/media/lm.pdf": "/static/media/lm.1a29405be05a5b1b4cbe.pdf",
@@ -26,17 +24,16 @@
     "static/media/facPhoto.png": "/static/media/facPhoto.324c7ec3e986a91658dd.png",
     "static/media/domainAdapt.png": "/static/media/domainAdapt.6777af223aad5ee430a0.png",
     "static/media/dv.jpeg": "/static/media/dv.da93498d0955e5e5f6ec.jpeg",
-    "static/media/eccho.png": "/static/media/eccho.a4e6464d078673ec76c2.png",
     "static/media/huawei.png": "/static/media/huawei.a41914ebe3249bf3698e.png",
     "static/media/college.jpg": "/static/media/college.e35b52e48c0e2a891ed3.jpg",
     "static/media/linearMixed.jpg": "/static/media/linearMixed.3a90c9d19e66b2329e33.jpg",
     "static/media/watch.jpg": "/static/media/watch.e15f9eb376b81672848b.jpg",
     "index.html": "/index.html",
-    "main.3346f80a.css.map": "/static/css/main.3346f80a.css.map",
-    "main.d7787ac9.js.map": "/static/js/main.d7787ac9.js.map"
+    "main.4d7d5968.css.map": "/static/css/main.4d7d5968.css.map",
+    "main.ebc30448.js.map": "/static/js/main.ebc30448.js.map"
   },
   "entrypoints": [
-    "static/css/main.3346f80a.css",
-    "static/js/main.d7787ac9.js"
+    "static/css/main.4d7d5968.css",
+    "static/js/main.ebc30448.js"
   ]
 }
