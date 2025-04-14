@@ -1,45 +1,27 @@
 {
   "files": {
     "main.css": "/static/css/main.4d7d5968.css",
-    "main.js": "/static/js/main.fc8e4c07.js",
+    "main.js": "/static/js/main.474586ef.js",
     "static/media/DSC00712.jpg": "/static/media/DSC00712.c4798a974460f2f1f65a.jpg",
     "static/media/DSC05015.jpg": "/static/media/DSC05015.fe57162df56a07d20809.jpg",
-    "static/media/facP.pdf": "/static/media/facP.09123cba2138eb29f8c5.pdf",
     "static/media/WX20250407-145346@2x.png": "/static/media/WX20250407-145346@2x.49b1eb88e27592fca912.png",
     "static/media/classroom.png": "/static/media/classroom.bff73a3bbef2a4e55390.png",
-    "static/media/report.pdf": "/static/media/report.27cda799c848916d584d.pdf",
-    "static/media/report2.pdf": "/static/media/report2.f4a41ed9710ca0745a2b.pdf",
     "static/media/hiking.jpg": "/static/media/hiking.d994af527217d32aab81.jpg",
     "static/media/ice.jpg": "/static/media/ice.9cfd62059c06ca58ef3f.jpg",
     "static/media/2022.PNG": "/static/media/2022.18f530742594efd05d4c.PNG",
     "static/media/oakville.png": "/static/media/oakville.3a19b48d1e7f706ed913.png",
-    "static/media/slides.pdf": "/static/media/slides.4732b3bb0ad3c579e36b.pdf",
-    "static/media/poster.PNG": "/static/media/poster.0ace50b1c22ace887eb2.PNG",
     "static/media/hiking2.jpg": "/static/media/hiking2.834dc085c3ddb310c1fe.jpg",
     "static/media/travel.jpg": "/static/media/travel.4b942b176a99adeee5d2.jpg",
     "static/media/profile-photo.jpg": "/static/media/profile-photo.b7fe887ecd7bf22e11f3.jpg",
-    "static/media/lm.pdf": "/static/media/lm.1a29405be05a5b1b4cbe.pdf",
     "static/media/running.jpg": "/static/media/running.9bb226e2d11f02f65b61.jpg",
-    "static/media/socialNetworks.jpg": "/static/media/socialNetworks.d38e4dcb2e5353fe8d09.jpg",
-    "static/media/spark2.png": "/static/media/spark2.2a3134d496b3609da9c5.png",
     "static/media/IMG_1170.jpg": "/static/media/IMG_1170.fa218fd1e71d31f93099.jpg",
-    "static/media/dv.pdf": "/static/media/dv.59c2c6633e92fabb8b6b.pdf",
     "static/media/bike.jpg": "/static/media/bike.0198a6fab95c2c30964b.jpg",
-    "static/media/mls.jpg": "/static/media/mls.42a319cf76fba42c14a8.jpg",
-    "static/media/huaweiBackground.jpg": "/static/media/huaweiBackground.b6cf4cdae2def0729177.jpg",
-    "static/media/facPhoto.png": "/static/media/facPhoto.324c7ec3e986a91658dd.png",
-    "static/media/domainAdapt.png": "/static/media/domainAdapt.6777af223aad5ee430a0.png",
-    "static/media/dv.jpeg": "/static/media/dv.da93498d0955e5e5f6ec.jpeg",
-    "static/media/huawei.png": "/static/media/huawei.a41914ebe3249bf3698e.png",
-    "static/media/college.jpg": "/static/media/college.e35b52e48c0e2a891ed3.jpg",
-    "static/media/linearMixed.jpg": "/static/media/linearMixed.3a90c9d19e66b2329e33.jpg",
-    "static/media/watch.jpg": "/static/media/watch.e15f9eb376b81672848b.jpg",
     "index.html": "/index.html",
     "main.4d7d5968.css.map": "/static/css/main.4d7d5968.css.map",
-    "main.fc8e4c07.js.map": "/static/js/main.fc8e4c07.js.map"
+    "main.474586ef.js.map": "/static/js/main.474586ef.js.map"
   },
   "entrypoints": [
     "static/css/main.4d7d5968.css",
-    "static/js/main.fc8e4c07.js"
+    "static/js/main.474586ef.js"
   ]
 }
