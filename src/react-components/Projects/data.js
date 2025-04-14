@@ -11,14 +11,14 @@ export default function Data() {
         <Link
           href={`${process.env.PUBLIC_URL}/mingar.pdf`}
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Pdf
         </Link>{" "}
         <Link
           href="https://github.com/Rachelz1231/Methods-of-Data-Analysis"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>
@@ -33,14 +33,14 @@ export default function Data() {
         <Link
           href={`${process.env.PUBLIC_URL}/collegeAdmission.pdf`}
           target="_blank"
-          sx={{ color: "yellow", mr: 1 }}
+          sx={{ color: "purple", mr: 1 }}
         >
           Pdf
         </Link>{" "} 
         <Link
           href="https://youtu.be/nluSvbEiRao"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Video
         </Link>
@@ -56,7 +56,7 @@ export default function Data() {
         <Link
           href={`${process.env.PUBLIC_URL}/mlsReport.pdf`}
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Pdf
         </Link>
@@ -74,7 +74,7 @@ export default function Data() {
         <Link
           href={`${process.env.PUBLIC_URL}/facReport.pdf`}
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Pdf
         </Link>
@@ -92,12 +92,12 @@ export default function Data() {
         <Link
           href={`${process.env.PUBLIC_URL}/#/research/social-networks`}
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Webpage
         </Link>
       </Typography>
-      <Typography variant="body2" color="white">
+      <Typography variant="body2">
         <i>
           Sept 2021 -- Dec 2022 | Individual Research supervised by Professor
           Peter Marbach | Toronto, ON, Canada

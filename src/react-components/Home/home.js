@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef } from "react";
 import profilePhoto from "./static/profile-photo.jpg";
-import { grey } from "@mui/material/colors";
 import { Box, Typography, Zoom, Paper, Button } from "@mui/material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 /* The AboutMe Component */
@@ -30,9 +29,7 @@ export default function AboutMe() {
             sx={{
               borderRadius: "50%",
               border: 5,
-              borderColor: `${grey[400]}`,
               backgroundImage: `url(${profilePhoto})`,
-              backgroundColor: "black",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               backgroundSize: "cover",
@@ -61,7 +58,6 @@ export default function AboutMe() {
             <Typography
               sx={{
                 fontSize: "36px",
-                color: { xs: "white" },
               }}
             >
               Hello! It's me,
@@ -75,7 +71,6 @@ export default function AboutMe() {
               sx={{
                 fontSize: "63px",
                 py: "0",
-                color: { xs: "white" },
               }}
             >
               Rachel Zeng.
@@ -96,7 +91,6 @@ export default function AboutMe() {
                   sm: "10px",
                   xs: "10px",
                 },
-                color: { xs: "white" },
               }}
             >
               I am currently pursuing a Master of Engineering at UC Berkeley.
@@ -113,12 +107,16 @@ export default function AboutMe() {
             in={true}
             style={{ transitionDuration: "700ms", transitionDelay: "200ms" }}
           >
-            <a href="/Yuchen_Zeng_resume.pdf" download style={{ textDecoration: "none" }}>
+            <a
+              href="/Yuchen_Zeng_resume.pdf"
+              download
+              style={{ textDecoration: "none" }}
+            >
               <Button
                 variant="contained"
                 startIcon={<CloudDownloadIcon />}
                 aria-label="email"
-                sx={{ color: "white", m: 2 }}
+                sx={{ m: 2 }}
               >
                 Resume
               </Button>

@@ -15,9 +15,6 @@ export default function Contact() {
         flexGrow: 1,
         zIndex: "-999",
         overflow: "hidden",
-        backgroundImage: `linear-gradient(${paletteBlackYellow[0]},
-            ${paletteBlue[4]})`,
-        color: { xs: "white" },
         px: "5vw",
         py: "150px",
         minHeight: "100vh",
@@ -28,7 +25,7 @@ export default function Contact() {
         I am actively seeking a full-time entry-level software engineer role
         starting May 2025!
       </Typography>
-      <Divider sx={{ backgroundColor: "white", m: 1 }}></Divider>
+      <Divider sx={{ m: 1 }}></Divider>
       
       <Grid
         className="contact"

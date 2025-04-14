@@ -14,47 +14,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import EmailIcon from "@mui/icons-material/Email";
-
-// const contact = [
-//   <Button
-//     startIcon={<LinkedInIcon />}
-//     aria-label="linkedIn"
-//     onClick={(event) => {
-//       window.open("https://www.linkedin.com/in/rachel-yuchen-zeng/", "_blank");
-//     }}
-//     sx={{ color: "white" }}
-//   >
-//     Linkedin
-//   </Button>,
-//   <Button
-//     startIcon={<EmailIcon />}
-//     aria-label="email"
-//     onClick={() => window.open("mailto:rachel.zeng@berkeley.edu")}
-//     sx={{ color: "white" }}
-//   >
-//     Email
-//   </Button>,
-//   <Button
-//     startIcon={<GitHubIcon />}
-//     aria-label="gitHub"
-//     onClick={() => window.open("https://github.com/Rachelz1231")}
-//     sx={{ color: "white" }}
-//   >
-//     GitHub
-//   </Button>,
-//   <Button
-//     startIcon={<WhatsAppIcon />}
-//     aria-label="whatsapp"
-//     onClick={() => window.open("https://wa.me/15108338855")}
-//     sx={{ color: "white" }}
-//   >
-//     +1 510 833 8855
-//   </Button>,
-// ];
 const drawerWidth = 240;
 const navItems = [
   "Home",
@@ -113,16 +72,15 @@ function ResponsiveAppBar(props) {
 
   return (
     <Box>
-      <AppBar position="fixed" sx={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#283618" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
-                color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { md: "none" } }}
+                sx={{ mr: 2, display: { md: "none" }, color: "white" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -131,55 +89,99 @@ function ResponsiveAppBar(props) {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                color: "white",
               }}
             >
-              <Button onClick={() => navigate("/")} sx={{ color: "white" }}>
+              <Button
+                onClick={() => navigate("/")}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
+              >
                 Home
               </Button>
               <Button
                 onClick={() => navigate("/experiences")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Experiences
               </Button>
               <Button
                 onClick={() => navigate("/projects")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Projects
               </Button>
               <Button
                 onClick={() => navigate("/publications")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Publications
               </Button>
               <Button
                 onClick={() => navigate("/management")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Management
               </Button>
               <Button
                 onClick={() => navigate("/education")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Education
               </Button>
-              <Button onClick={() => navigate("/more")} sx={{ color: "white" }}>
+              <Button
+                onClick={() => navigate("/more")}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
+              >
                 More
               </Button>
             </Box>{" "}
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
-                color: "white",
               }}
             >
               <Button
                 onClick={() => navigate("/contact")}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#606c38",
+                  },
+                }}
               >
                 Contact
               </Button>

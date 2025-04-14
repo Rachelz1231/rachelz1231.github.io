@@ -39,26 +39,29 @@ const Home = () => {
   return (
     <Box
       sx={{
-        zIndex: "-999",
+        zIndex: -999, // no quotes needed for numbers
         overflow: "hidden",
-        backgroundImage: `linear-gradient(${paletteBlackYellow[0]},
-            ${paletteBlue[4]},
-            ${paletteBlue[4]},
-            ${paletteBlue[4]},
-            ${paletteBlackRice[4]},
-            ${paletteBlackRice[4]},
-            ${paletteBlackYellow[0]}, 
-            ${paletteBlackYellow[1]}, ${paletteBlackYellow[1]}, 
-            ${paletteBlue[0]},${paletteBlue[0]})`,
+        height: "100vh", // full height of the viewport
+        backgroundImage: `linear-gradient(
+      #fefae0,
+      #ccd5ae, 
+      #e9edc9
+    )`,
       }}
     >
       <ResponsiveAppBar></ResponsiveAppBar>
       <AboutMe></AboutMe>
-      <WorkExperiences></WorkExperiences>
-      <ResearchExperiences></ResearchExperiences>
-      <DataAnalysis></DataAnalysis>
-      <Contact></Contact>
-      <Footer />
+      {/* <WorkExperiences></WorkExperiences> 
+            // ${paletteBlue[4]},
+            // ${paletteBlue[4]},
+            ${paletteBlackYellow[0]}, 
+            ${paletteBlackYellow[1]}, 
+            ${paletteBlackRice[4]},
+            // ${paletteBlackRice[4]},*/}
+      {/* <ResearchExperiences></ResearchExperiences> */}
+      {/* <DataAnalysis></DataAnalysis> */}
+      {/* <Contact></Contact> */}
+      {/* <Footer /> */}
     </Box>
   );
 };

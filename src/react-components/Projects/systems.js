@@ -10,12 +10,12 @@ export default function Systems() {
         <Link
           href="https://github.com/Rachelz1231/Fault-tolerant-key-value-service"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>
       </Typography>
-      <Typography variant="body2" color="white">
+      <Typography variant="body2">
         <i>Jan 2023 - May 2024</i>
       </Typography>
       <Typography>
@@ -34,12 +34,12 @@ export default function Systems() {
         <Link
           href="https://github.com/Rachelz1231/Key-Value-Database"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>
       </Typography>
-      <Typography variant="body2" color="white">
+      <Typography variant="body2">
         <i>Sept 2023 - Dec 2023</i>
       </Typography>
       <Typography>
@@ -57,7 +57,7 @@ export default function Systems() {
         <Link
           href="https://github.com/Rachelz1231/Parallel-Memory-Allocator"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>

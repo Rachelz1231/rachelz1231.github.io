@@ -8,7 +8,7 @@ export default function LeeLab() {
         Undergraduate Research Team Lead in University of Toronto, Lee Language
         Lab
       </Typography>
-      <Typography variant="subtitle1" color="white">
+      <Typography variant="subtitle1">
         <i>Jan 2023 – May 2024 | Toronto, ON, Canada</i>
       </Typography>
       <Typography sx={{ fontSize: { xs: "3vw", sm: "20px", lg: "20px" } }}>

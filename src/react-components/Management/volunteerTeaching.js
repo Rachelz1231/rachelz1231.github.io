@@ -7,7 +7,7 @@ export default function VolunteerTeaching() {
       <Typography variant="h5" component="div" gutterBottom>
         Vice President at Educating Chinese Children Hope Offered (ECCHO)
       </Typography>
-      <Typography variant="subtitle1" color="white">
+      <Typography variant="subtitle1">
         <i>Sept 2019 – May 2022 | Toronto, ON, Canada</i>
       </Typography>
 

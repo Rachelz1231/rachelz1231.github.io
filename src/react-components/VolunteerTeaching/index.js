@@ -16,15 +16,12 @@ export default function Education() {
         flexGrow: 1,
         zIndex: "-999",
         overflow: "hidden",
-        backgroundImage: `linear-gradient(${paletteBlackYellow[0]},
-            ${paletteBlue[4]})`,
-        color: { xs: "white" },
         px: "5vw",
         py: "150px",
       }}
     >
       <Typography variant="h2">Education</Typography>
-      <Divider sx={{ backgroundColor: "white", m:1 }}></Divider>
+      <Divider sx={{ m:1 }}></Divider>
       <Box sx={{ display: "inline-block" }}>
         <Paper
           sx={{

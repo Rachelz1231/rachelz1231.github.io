@@ -12,15 +12,12 @@ export default function Projects() {
         flexGrow: 1,
         zIndex: "-999",
         overflow: "hidden",
-        backgroundImage: `linear-gradient(${paletteBlackYellow[0]},
-            ${paletteBlue[4]})`,
-        color: { xs: "white" },
         px: "5vw",
         py: "150px",
       }}
     >
       <Typography variant="h2">Projects</Typography>
-      <Divider sx={{ backgroundColor: "white", m: 1 }}></Divider>
+      <Divider sx={{ m: 1 }}></Divider>
       <Systems></Systems>
       <Swe></Swe>
       <Data></Data>

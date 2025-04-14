@@ -12,20 +12,17 @@ export default function Management() {
         flexGrow: 1,
         zIndex: "-999",
         overflow: "hidden",
-        backgroundImage: `linear-gradient(${paletteBlackYellow[0]},
-            ${paletteBlue[4]})`,
-        color: { xs: "white" },
         px: "5vw",
         py: "150px",
       }}
     >
       <Typography variant="h2">Management and Leaderships</Typography>
-      <Divider sx={{ backgroundColor: "white", m: 1 }}></Divider>
+      <Divider sx={{ m: 1 }}></Divider>
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" component="div" gutterBottom>
           Research Lead at University of California, Berkeley
         </Typography>
-        <Typography variant="subtitle1" color="white">
+        <Typography variant="subtitle1">
           <i>
             The Donald O. Pederson Center for Electronic Systems Design | Sept
             2024 – Present | Berkeley, CA, USA

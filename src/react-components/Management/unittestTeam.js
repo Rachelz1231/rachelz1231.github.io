@@ -7,7 +7,7 @@ export default function UnittestTeam() {
       <Typography variant="h5" component="div" gutterBottom>
         Unittest Lead at Huawei Technologies Canada Ltd.
       </Typography>
-      <Typography variant="subtitle1" color="white">
+      <Typography variant="subtitle1">
         <i>May 2022 – Aug 2023 | Markham, ON, Canada</i>
       </Typography>
       <Typography sx={{ fontSize: { xs: "3vw", sm: "20px", lg: "20px" } }}>

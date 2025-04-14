@@ -8,7 +8,7 @@ export default function Swe() {
       <Typography variant="h6" component="div">
         <strong>Telemedicine for Stroke Rehabilitation</strong>
       </Typography>
-      <Typography variant="body2" color="white">
+      <Typography variant="body2" >
         <i>Sept 2024 - Present</i>
       </Typography>
       <Typography>
@@ -24,7 +24,7 @@ export default function Swe() {
         <Link
           href="https://github.com/Rachelz1231/Rightee-AI-Writing-Assistant"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>
@@ -42,7 +42,7 @@ export default function Swe() {
         <Link
           href="https://github.com/Rachelz1231/Moba-Tracker-Web-App"
           target="_blank"
-          sx={{ color: "yellow" }}
+          sx={{ color: "purple" }}
         >
           Git
         </Link>

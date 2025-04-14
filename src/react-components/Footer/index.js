@@ -7,7 +7,7 @@ class Footer extends React.Component {
     const { title, subtitle } = this.props;
     return (
       <Box sx={{ marginTop: { xs: "20px" } }}>
-        <Typography className="footer">BUILT FROM SCRATCH BY ME :)</Typography>
+        {/* <Typography className="footer">BUILT FROM SCRATCH BY ME :)</Typography> */}
       </Box>
     );
   }
