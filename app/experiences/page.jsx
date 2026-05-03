@@ -13,7 +13,7 @@ const experiences = [
   },
   {
     role: "Graduate Researcher",
-    org: "UC Berkeley — Cognition and Computation in Design Lab + Pederson Center",
+    org: "UC Berkeley — Cognition and Computation in Design Lab + Donald O. Pederson Center for Electronic Systems Design",
     period: "Sept 2024 – May 2025",
     location: "Berkeley, CA",
     body:

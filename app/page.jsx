@@ -133,6 +133,43 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      <section className="border-t border-border/60">
+        <div className="container-narrow py-20">
+          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">
+            Research
+          </p>
+          <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+            AI-powered accessible healthcare
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-foreground/90">
+            My academic research investigates how large language models and
+            intelligent interfaces can extend mental and physical care to
+            populations who are otherwise under-served. Recent work spans
+            LLM-enhanced narrative interventions for emotional well-being
+            (CHI 2024, Best Paper Honorable Mention), digital-calendar
+            integrations for stress management, and AR-based authoring tools
+            for stroke rehabilitation.
+          </p>
+          <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+            I'm continuing this work alongside industry — and actively looking
+            for academic collaborators in the space.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild variant="outline">
+              <Link href="/publications">
+                View publications
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="ghost">
+              <Link href="/contact">
+                Get in touch
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

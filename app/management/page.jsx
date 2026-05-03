@@ -5,7 +5,7 @@ export const metadata = { title: "Leadership" };
 const roles = [
   {
     title: "Research Lead",
-    org: "UC Berkeley — Pederson Center for Electronic Systems Design",
+    org: "UC Berkeley — Donald O. Pederson Center for Electronic Systems Design",
     period: "Sept 2024 – May 2025",
     location: "Berkeley, CA",
     body:

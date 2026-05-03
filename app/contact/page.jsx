@@ -38,7 +38,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Let's talk"
-        description="Currently a software engineer at TikTok in San Jose, working on search infrastructure. Always happy to chat about distributed systems, ML, or research."
+        description="Software engineer at TikTok in San Jose. Outside of work, I'm pursuing research on AI-powered accessible healthcare — actively looking for academic collaborators in that space. Always happy to hear from people working on systems, ML, or research more broadly."
       />
       <section className="container-narrow py-16">
         <div className="grid gap-4 sm:grid-cols-2">
