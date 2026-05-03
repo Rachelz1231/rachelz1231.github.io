@@ -32,6 +32,5 @@ Deploy to **Vercel**: import this repo, set the `ORCID_ID` env var, and point `r
 
 ## Branches
 
-- `nextjs` — current source (this branch)
-- `react` — old Create React App source (kept for reference)
-- `master` — old static build output from CRA + GitHub Pages (kept for current live site)
+- `main` — current source (this branch); deployed by Vercel
+- `master` — redirect-only, sends all `rachelz1231.github.io/*` traffic to `rachelz.ca/*`
