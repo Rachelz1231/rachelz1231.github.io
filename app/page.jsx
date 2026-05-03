@@ -1,8 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  FileText,
+  GraduationCap,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { RESUME_URL, CV_URL } from "@/lib/links";
 
 const highlights = [
   {
@@ -60,13 +68,15 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a
-                  href="/Yuchen_Zeng_resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Download className="h-4 w-4" />
+                <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+                  <FileText className="h-4 w-4" />
                   Resume
+                </a>
+              </Button>
+              <Button asChild variant="ghost" size="lg">
+                <a href={CV_URL} target="_blank" rel="noopener noreferrer">
+                  <GraduationCap className="h-4 w-4" />
+                  Academic CV
                 </a>
               </Button>
             </div>

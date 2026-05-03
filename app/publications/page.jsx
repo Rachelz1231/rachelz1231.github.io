@@ -1,7 +1,8 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, GraduationCap } from "lucide-react";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Badge } from "@/components/ui/badge";
 import { fetchPublications } from "@/lib/publications";
+import { CV_URL } from "@/lib/links";
 
 export const metadata = { title: "Publications" };
 export const revalidate = 86400; // refresh data once per day
@@ -25,6 +26,15 @@ export default async function PublicationsPage() {
         description="Refreshed daily from ORCID — peer-reviewed papers and preprints."
       />
       <section className="container-narrow py-16">
+        <a
+          href={CV_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-10 inline-flex items-center gap-2 rounded-md border border-border bg-muted/40 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          <GraduationCap className="h-4 w-4" />
+          Download full academic CV
+        </a>
         <div className="space-y-12">
           {years.map((year) => (
             <div key={year}>
