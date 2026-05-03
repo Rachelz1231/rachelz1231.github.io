@@ -18,17 +18,17 @@ npm start
 
 ## Dynamic Publications
 
-`/publications` fetches from the Semantic Scholar API at build time and revalidates daily (ISR). To enable live fetching, set:
+`/publications` fetches from the ORCID public API at build time and revalidates daily (ISR). To enable live fetching, set:
 
 ```
-SEMANTIC_SCHOLAR_AUTHOR_ID=<your-author-id>
+ORCID_ID=0000-0000-0000-0000
 ```
 
-Find your author ID from the URL on https://www.semanticscholar.org/author/... — it's the number at the end. Without the env var, `/publications` falls back to the curated list in `lib/publications.js`. Notes (e.g. "Best Paper Honorable Mention") are merged into matching API entries by title.
+Your ORCID iD is the 16-digit identifier on your ORCID profile (https://orcid.org/). The page falls back to the curated list in `lib/publications.js` when ORCID is unavailable or no ID is configured. Editorial notes (e.g. "Best Paper Honorable Mention") and missing fields are merged from the fallback into matching ORCID entries by title.
 
 ## Deployment
 
-Deploy to **Vercel**: import this repo, set the `SEMANTIC_SCHOLAR_AUTHOR_ID` env var, and point `rachelz.ca` at it via DNS. The previous GitHub Pages CNAME (`master` branch) can stay as-is until DNS cuts over.
+Deploy to **Vercel**: import this repo, set the `ORCID_ID` env var, and point `rachelz.ca` at it via DNS. The previous GitHub Pages CNAME (`master` branch) can stay as-is until DNS cuts over.
 
 ## Branches
 

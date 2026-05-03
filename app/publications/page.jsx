@@ -22,7 +22,7 @@ export default async function PublicationsPage() {
       <PageHeader
         eyebrow="Publications"
         title="Selected publications"
-        description="Refreshed daily from Semantic Scholar — peer-reviewed papers and preprints."
+        description="Refreshed daily from ORCID — peer-reviewed papers and preprints."
       />
       <section className="container-narrow py-16">
         <div className="space-y-12">
@@ -80,16 +80,16 @@ export default async function PublicationsPage() {
         </div>
 
         <p className="mt-16 text-xs text-muted-foreground">
-          Source: Semantic Scholar (with editorial fallback). Set{" "}
-          <code className="font-mono">SEMANTIC_SCHOLAR_AUTHOR_ID</code> in
-          environment to enable live fetching — see{" "}
+          Source: ORCID (with editorial fallback). Set{" "}
+          <code className="font-mono">ORCID_ID</code> in environment to enable
+          live fetching — see{" "}
           <a
-            href="https://api.semanticscholar.org/graph/v1#tag/Author-Data"
+            href="https://info.orcid.org/documentation/api-tutorials/api-tutorial-read-data-on-a-record/"
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:text-primary"
           >
-            API docs
+            ORCID API docs
           </a>
           .
         </p>
