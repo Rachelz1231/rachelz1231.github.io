@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 60 30% 98%;
+    --foreground: 80 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 80 20% 12%;
+    --primary: 75 32% 32%;
+    --primary-foreground: 60 30% 98%;
+    --secondary: 70 22% 90%;
+    --secondary-foreground: 80 20% 12%;
+    --muted: 60 15% 94%;
+    --muted-foreground: 80 10% 40%;
+    --accent: 70 22% 90%;
+    --accent-foreground: 80 20% 12%;
+    --border: 80 15% 88%;
+    --input: 80 15% 88%;
+    --ring: 75 32% 32%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 80 14% 8%;
+    --foreground: 60 20% 92%;
+    --card: 80 14% 10%;
+    --card-foreground: 60 20% 92%;
+    --primary: 75 30% 70%;
+    --primary-foreground: 80 14% 10%;
+    --secondary: 80 14% 16%;
+    --secondary-foreground: 60 20% 92%;
+    --muted: 80 14% 16%;
+    --muted-foreground: 80 10% 65%;
+    --accent: 80 14% 16%;
+    --accent-foreground: 60 20% 92%;
+    --border: 80 14% 18%;
+    --input: 80 14% 18%;
+    --ring: 75 30% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto w-full max-w-4xl px-6 sm:px-8;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+}
