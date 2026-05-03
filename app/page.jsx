@@ -14,14 +14,17 @@ import { RESUME_URL, CV_URL } from "@/lib/links";
 
 const highlights = [
   {
+    title: "TikTok",
+    detail: "Software Engineer — Search Engine ML/AI Infrastructure",
+  },
+  {
     title: "UC Berkeley",
-    detail: "M.Eng. — Cognition & Computation in Design Lab",
+    detail: "M.Eng., Electrical Engineering & Computer Science (2024–2025)",
   },
   {
     title: "University of Toronto",
-    detail: "B.Sc. Computer Science — distributed systems & web",
+    detail: "B.Sc., Computer Science & Statistics (2019–2024)",
   },
-  { title: "Huawei Canada", detail: "Distributed systems engineer, GaussDB" },
 ];
 
 export default function HomePage() {
@@ -54,10 +57,10 @@ export default function HomePage() {
               Hi, I'm Rachel.
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I build systems and study how people use them. Currently pursuing
-              my M.Eng. at UC Berkeley, after a B.Sc. in Computer Science from
-              the University of Toronto focused on distributed systems and the
-              web.
+              I build systems and study how people use them. Currently a
+              software engineer at TikTok working on search infrastructure,
+              after completing my M.Eng. at UC Berkeley and a B.Sc. in Computer
+              Science & Statistics at the University of Toronto.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -101,7 +104,7 @@ export default function HomePage() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:rachel.zeng@berkeley.edu"
+                href="mailto:rachel.yuchen.zeng@gmail.com"
                 className="transition-colors hover:text-foreground"
                 aria-label="Email"
               >

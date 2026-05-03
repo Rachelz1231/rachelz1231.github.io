@@ -6,10 +6,10 @@ const roles = [
   {
     title: "Research Lead",
     org: "UC Berkeley — Pederson Center for Electronic Systems Design",
-    period: "Sept 2024 – Present",
+    period: "Sept 2024 – May 2025",
     location: "Berkeley, CA",
     body:
-      "Designing a user-oriented system that helps clinicians create rehabilitation curriculums tailored to individual patients — letting doctors place virtual objects in living-area surroundings to define exercises without code, supervised by Edward Kim.",
+      "Led a user-oriented system that helps clinicians create rehabilitation curriculums tailored to individual patients — letting doctors place virtual objects in living-area surroundings to define exercises without code, supervised by Edward Kim.",
   },
   {
     title: "Undergraduate Research Team Lead",

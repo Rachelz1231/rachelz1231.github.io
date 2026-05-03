@@ -4,9 +4,17 @@ export const metadata = { title: "Experience" };
 
 const experiences = [
   {
-    role: "Software Developer & Lead Researcher",
+    role: "Software Engineer",
+    org: "TikTok — Search Engine, ML and AI Infrastructure",
+    period: "June 2025 – Present",
+    location: "San Jose, CA",
+    body:
+      "Re-architected the e-commerce search pipeline to integrate a generative retrieval module with LLM-based Semantic ID retrieval into the existing multi-stage cascading system, supporting real-time inverted index serving over 800M documents. Designed and owned a distributed aggregation service that decomposed retrieval and merge logic from a monolithic engine for independent scaling — enabling 2× retrieval candidate volume with 5.4% lower ranking latency and +1.4% click-through rate, serving 141M+ daily page views across 5+ regions during 60× traffic growth. Built autonomous AI agents for performance optimization (analyzing flamegraphs, writing merge requests, self-validating via metric regression detection) and cross-region latency diagnosis. Reduced search end-to-end latency by up to 40 ms P80 (5%) via an asynchronous result prepack pipeline, lifting search engagement +0.28% across the full US user base.",
+  },
+  {
+    role: "Graduate Researcher",
     org: "UC Berkeley — Cognition and Computation in Design Lab + Pederson Center",
-    period: "Sept 2024 – Present",
+    period: "Sept 2024 – May 2025",
     location: "Berkeley, CA",
     body:
       "Led development of a Chrome extension with TypeScript, React, and Flask integrating generative AI for visual stimuli research. Built a personalized AR rehabilitation task authoring tool using Unity on Meta Quest 3. Created a compliant EMR web system using React, Next.js, Node.js, and Firebase. Hosted cloud infrastructure on AWS, integrating CI/CD with Jenkins and Docker.",
@@ -20,12 +28,12 @@ const experiences = [
       "Deployed full-stack SaaS tools using GPT-4 and LLMs to support youth in mental health and creative writing. Developed apps with React.js, NestJS, Flask, and MongoDB for iOS, Android, and Web. Led user studies and co-authored 3 peer-reviewed papers, including CHI submissions.",
   },
   {
-    role: "Distributed Systems Engineer",
-    org: "Huawei Technologies Canada — Distributed Data and Storage Lab",
+    role: "Assistant Engineer",
+    org: "Huawei Technologies Canada — Distributed Data and Storage Management Lab",
     period: "May 2022 – Aug 2023",
     location: "Markham, ON",
     body:
-      "Developed core database features in C/C++ for GaussDB (PostgreSQL-based), including LRU cache, consistent hashing, and B-/LSM-trees. Achieved a 150% tpmC performance boost via TPC-C benchmarking. Designed 50+ tests simulating distributed system edge cases. Presented architecture insights to 40+ engineers using KVM-based environments.",
+      "Implemented buffer pool with LRU eviction and page directory modules for GaussDB, Huawei's enterprise-grade distributed PostgreSQL-based database. Used consistent hashing with virtual nodes to partition pages across nodes, enabling hash-directed failover for fast replica lookup on node failure. Developed replica-assisted crash recovery so restarting nodes rebuild state from peers' in-memory buffer pools rather than disk — contributing to a 150% throughput increase on industry-standard OLTP benchmarks. Led a test group that built concurrency and failover suites validating correctness under concurrent buffer pool access, page directory updates, and multi-node crash recovery.",
   },
   {
     role: "ML Engineer & Lead Researcher",

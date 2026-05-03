@@ -63,7 +63,7 @@ const groups = [
     projects: [
       {
         name: "Telemedicine for Stroke Rehabilitation",
-        period: "Sept 2024 – Present",
+        period: "Sept 2024 – May 2025",
         tags: ["AR", "React", "Unity"],
         body:
           "User-oriented system that helps clinicians design rehabilitation curriculums tailored to individual patients — placing virtual objects in the patient's living areas to define tasks without code.",

@@ -9,8 +9,8 @@ const channels = [
   {
     icon: Mail,
     label: "Email",
-    value: "rachel.zeng@berkeley.edu",
-    href: "mailto:rachel.zeng@berkeley.edu",
+    value: "rachel.yuchen.zeng@gmail.com",
+    href: "mailto:rachel.yuchen.zeng@gmail.com",
   },
   {
     icon: Linkedin,
@@ -38,7 +38,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Let's talk"
-        description="I'm actively seeking full-time entry-level software engineer roles starting May 2025. Always happy to chat about systems, ML, or research."
+        description="Currently a software engineer at TikTok in San Jose, working on search infrastructure. Always happy to chat about distributed systems, ML, or research."
       />
       <section className="container-narrow py-16">
         <div className="grid gap-4 sm:grid-cols-2">
