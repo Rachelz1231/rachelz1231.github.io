@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   calculateBazi,
   majorLuckCycles,
@@ -49,17 +49,7 @@ export default function BaziPage() {
     return out;
   }, []);
 
-  const place = useMemo(() => {
-    if (form.placeId === "__custom__") {
-      const lon = Number(form.customLon);
-      const tz = Number(form.customTz);
-      if (Number.isFinite(lon) && Number.isFinite(tz)) {
-        return { name: "自定义", lon, tzMeridian: tz * 15 };
-      }
-      return null;
-    }
-    return BIRTH_PLACES.find((p) => p.id === form.placeId) || null;
-  }, [form.placeId, form.customLon, form.customTz]);
+  const place = useMemo(() => placeFromForm(form), [form.placeId, form.customLon, form.customTz]);
 
   const update = (field) => (e) => {
     const t = e.target;
@@ -74,14 +64,14 @@ export default function BaziPage() {
     setForm((f) => ({ ...f, [field]: v }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const { year, month, day, hour, minute, isDst, gender } = form;
+  // 给定一份表单状态，计算并填进所有面板；返回 true 表示成功。
+  const runFromForm = (formData) => {
+    const p = placeFromForm(formData);
+    if (!p) return false;
+    const { year, month, day, hour, minute, isDst, gender } = formData;
     if ([year, month, day, hour, minute].some((n) => n === "" || Number.isNaN(n))) {
-      return;
+      return false;
     }
-    if (!place) return;
-    // 夏令时 → 先减 1 小时回到标准时
     let h = hour, mi = minute, y = year, mo = month, d = day;
     if (isDst) {
       const base = new Date(Date.UTC(y, mo - 1, d, h, mi));
@@ -94,9 +84,8 @@ export default function BaziPage() {
     }
     const r = calculateBazi({
       year: y, month: mo, day: d, hour: h, minute: mi,
-      lon: place.lon, tzMeridian: place.tzMeridian,
+      lon: p.lon, tzMeridian: p.tzMeridian,
     });
-    // 大运用真太阳时校正后的日期
     const adj = r.solar
       ? { y: r.solar.year, m: r.solar.month, d: r.solar.day, h: r.solar.hour, mi: Math.floor(r.solar.minute) }
       : { y, m: mo, d, h, mi };
@@ -112,10 +101,27 @@ export default function BaziPage() {
     setElements(elementAnalysis(r));
     setGeJu(pickGeJu(r));
     setRelations(analyzeRelations(r));
-    setSubmitted({ ...form, place });
+    setSubmitted({ ...formData, place: p });
     setSelDaYun(null);
     setSelLiuNian(null);
+    return true;
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (runFromForm(form)) writeFormToUrl(form);
+  };
+
+  // 进入页面时如带 query 参数，预填表单并自动排盘
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("year")) return;
+    const parsed = parseFormFromUrl(params);
+    setForm(parsed);
+    runFromForm(parsed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative">
@@ -170,4 +176,57 @@ export default function BaziPage() {
       )}
     </div>
   );
+}
+
+function placeFromForm(form) {
+  if (form.placeId === "__custom__") {
+    const lon = Number(form.customLon);
+    const tz = Number(form.customTz);
+    if (Number.isFinite(lon) && Number.isFinite(tz)) {
+      return { name: "自定义", lon, tzMeridian: tz * 15 };
+    }
+    return null;
+  }
+  return BIRTH_PLACES.find((p) => p.id === form.placeId) || null;
+}
+
+// 把表单状态写入 URL 查询串（用 replaceState，避免堆积历史记录）
+function writeFormToUrl(form) {
+  const params = new URLSearchParams();
+  params.set("year", String(form.year));
+  params.set("month", String(form.month));
+  params.set("day", String(form.day));
+  params.set("hour", String(form.hour));
+  if (form.minute) params.set("min", String(form.minute));
+  params.set("gender", form.gender);
+  params.set("place", form.placeId);
+  if (form.isDst) params.set("dst", "1");
+  if (form.placeId === "__custom__") {
+    if (form.customLon !== "") params.set("lon", String(form.customLon));
+    if (form.customTz !== "") params.set("tz", String(form.customTz));
+  }
+  const next = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState(null, "", next);
+}
+
+// 从 URL 查询串读回表单状态（缺省值兜底）
+function parseFormFromUrl(params) {
+  const num = (key, def) => {
+    const v = params.get(key);
+    if (v == null) return def;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : def;
+  };
+  return {
+    year: num("year", new Date().getFullYear() - 30),
+    month: num("month", 1),
+    day: num("day", 1),
+    hour: num("hour", 12),
+    minute: num("min", 0),
+    gender: params.get("gender") === "female" ? "female" : "male",
+    placeId: params.get("place") || "beijing",
+    customLon: params.get("lon") || "",
+    customTz: params.get("tz") || "",
+    isDst: params.get("dst") === "1",
+  };
 }
