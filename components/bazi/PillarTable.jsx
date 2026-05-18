@@ -148,37 +148,41 @@ export function PillarTable({ result, form }) {
   return (
     <Card className="mt-6 overflow-hidden p-0">
       <TermBannerRow result={result} form={form} />
-      <div className="grid grid-cols-[64px_repeat(4,1fr)] border-y border-border bg-muted/60">
-        <div />
-        {PILLAR_LABELS.map(({ key, title, subtitle }) => (
-          <div
-            key={key}
-            className="border-l border-border px-2 py-3 text-center"
-          >
-            <p className="text-sm font-medium text-foreground">{title}</p>
-            <p className="text-[10px] text-muted-foreground">{subtitle}</p>
-          </div>
-        ))}
-      </div>
-      <div className="divide-y divide-border">
-        {rows.map((row) => (
-          <div
-            key={row.label}
-            className="grid grid-cols-[64px_repeat(4,1fr)]"
-          >
-            <div className="flex items-center justify-center bg-muted/30 py-3 text-xs text-muted-foreground">
-              {row.label}
-            </div>
-            {row.cells.map((cell, i) => (
+      <div className="overflow-x-auto">
+        <div className="min-w-[480px]">
+          <div className="grid grid-cols-[64px_repeat(4,minmax(96px,1fr))] border-y border-border bg-muted/60">
+            <div />
+            {PILLAR_LABELS.map(({ key, title, subtitle }) => (
               <div
-                key={i}
-                className="flex items-center justify-center border-l border-border px-2 py-3 text-center"
+                key={key}
+                className="border-l border-border px-2 py-3 text-center"
               >
-                {cell}
+                <p className="text-sm font-medium text-foreground">{title}</p>
+                <p className="text-[10px] text-muted-foreground">{subtitle}</p>
               </div>
             ))}
           </div>
-        ))}
+          <div className="divide-y divide-border">
+            {rows.map((row) => (
+              <div
+                key={row.label}
+                className="grid grid-cols-[64px_repeat(4,minmax(96px,1fr))]"
+              >
+                <div className="flex items-center justify-center bg-muted/30 py-3 text-xs text-muted-foreground">
+                  {row.label}
+                </div>
+                {row.cells.map((cell, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-center border-l border-border px-2 py-3 text-center"
+                  >
+                    {cell}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Card>
   );
