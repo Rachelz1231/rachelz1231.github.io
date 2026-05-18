@@ -12,6 +12,14 @@ export function InputForm({ form, update, groupedPlaces, onSubmit }) {
         onSubmit={onSubmit}
         className="grid grid-cols-2 gap-4 sm:grid-cols-6"
       >
+        <Field label="姓名（可选）" className="col-span-2 sm:col-span-6">
+          <input
+            type="text" maxLength="40"
+            value={form.name} onChange={update("name")}
+            placeholder="例如 张三"
+            className={inputCls}
+          />
+        </Field>
         <Field label="阳历年" className="col-span-2 sm:col-span-2">
           <input
             type="number" min="1900" max="2100"

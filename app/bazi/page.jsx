@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   calculateBazi,
   majorLuckCycles,
@@ -19,20 +20,22 @@ import { ElementsPanel } from "@/components/bazi/ElementsPanel";
 import { DaYunPanel } from "@/components/bazi/DaYunPanel";
 import { LiuNianPanel } from "@/components/bazi/LiuNianPanel";
 
+const DEFAULT_FORM = {
+  name: "",
+  year: new Date().getFullYear() - 30,
+  month: 1,
+  day: 1,
+  hour: 12,
+  minute: 0,
+  gender: "male",
+  placeId: "beijing",
+  customLon: "",
+  customTz: "",
+  isDst: false,
+};
+
 export default function BaziPage() {
-  const today = new Date();
-  const [form, setForm] = useState({
-    year: today.getFullYear() - 30,
-    month: 1,
-    day: 1,
-    hour: 12,
-    minute: 0,
-    gender: "male",
-    placeId: "beijing",
-    customLon: "",
-    customTz: "",
-    isDst: false,
-  });
+  const [form, setForm] = useState(DEFAULT_FORM);
   const [result, setResult] = useState(null);
   const [luck, setLuck] = useState(null);
   const [strength, setStrength] = useState(null);
@@ -69,12 +72,14 @@ export default function BaziPage() {
 
   const place = useMemo(() => placeFromForm(form), [form.placeId, form.customLon, form.customTz]);
 
+  const pairHref = useMemo(() => buildPairHref(form), [form]);
+
   const update = (field) => (e) => {
     const t = e.target;
     const v =
       t.type === "checkbox"
         ? t.checked
-        : ["placeId", "customLon", "customTz", "gender"].includes(field)
+        : ["name", "placeId", "customLon", "customTz", "gender"].includes(field)
           ? t.value
           : t.value === ""
             ? ""
@@ -152,9 +157,17 @@ export default function BaziPage() {
         <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">
           BaZi · 四柱八字
         </p>
-        <h1 className="font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          八字排盘
-        </h1>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <h1 className="font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            八字排盘
+          </h1>
+          <Link
+            href={pairHref}
+            className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            八字合盘 →
+          </Link>
+        </div>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           填入阳历出生年月日时分与出生地点，自动按真太阳时（经度时差 + 均时差）
           换算后排出年、月、日、时四柱。
@@ -211,6 +224,7 @@ function placeFromForm(form) {
 // 把表单状态写入 URL 查询串（用 replaceState，避免堆积历史记录）
 function writeFormToUrl(form) {
   const params = new URLSearchParams();
+  if (form.name) params.set("name", form.name);
   params.set("year", String(form.year));
   params.set("month", String(form.month));
   params.set("day", String(form.day));
@@ -227,6 +241,37 @@ function writeFormToUrl(form) {
   window.history.replaceState(null, "", next);
 }
 
+// 当前表单是否与默认表单不同（未改动则不携带数据进合盘）
+function isFormCustomized(form) {
+  for (const k of Object.keys(DEFAULT_FORM)) {
+    if (form[k] !== DEFAULT_FORM[k]) return true;
+  }
+  return false;
+}
+
+// 生成合盘链接：若表单已被修改，把当前数据作为 A 方带过去
+function buildPairHref(form) {
+  if (!isFormCustomized(form)) return "/bazi/bazi-pair";
+  const params = new URLSearchParams();
+  const put = (key, val) => {
+    if (val !== "" && val != null) params.set(key, String(val));
+  };
+  if (form.name) put("a_name", form.name);
+  put("a_year", form.year);
+  put("a_month", form.month);
+  put("a_day", form.day);
+  put("a_hour", form.hour);
+  if (form.minute) put("a_min", form.minute);
+  put("a_gender", form.gender);
+  put("a_place", form.placeId);
+  if (form.isDst) params.set("a_dst", "1");
+  if (form.placeId === "__custom__") {
+    if (form.customLon !== "") put("a_lon", form.customLon);
+    if (form.customTz !== "") put("a_tz", form.customTz);
+  }
+  return `/bazi/bazi-pair?${params.toString()}`;
+}
+
 // 从 URL 查询串读回表单状态（缺省值兜底）
 function parseFormFromUrl(params) {
   const num = (key, def) => {
@@ -236,6 +281,7 @@ function parseFormFromUrl(params) {
     return Number.isFinite(n) ? n : def;
   };
   return {
+    name: params.get("name") || "",
     year: num("year", new Date().getFullYear() - 30),
     month: num("month", 1),
     day: num("day", 1),

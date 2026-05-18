@@ -4,11 +4,15 @@ import { CopyLinkButton } from "./CopyLinkButton";
 
 export function ResultSummary({ form, result }) {
   if (!form) return null;
-  const { year, month, day, hour, minute, isDst, place } = form;
+  const { name, year, month, day, hour, minute, isDst, place } = form;
   const solar = result.solar;
   const hourLbl = solar ? hourLabelOf(solar.hour) : hourLabelOf(hour);
+  const displayName = (name && name.trim()) || "您";
   return (
     <Card className="mt-2 mb-6 p-5">
+      <h2 className="mb-3 font-serif text-2xl font-semibold text-foreground">
+        {displayName}的四柱八字
+      </h2>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1 text-sm">
           <div className="text-foreground">
