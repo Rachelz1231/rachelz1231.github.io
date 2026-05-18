@@ -43,6 +43,24 @@ export default function BaziPage() {
   const [selDaYun, setSelDaYun] = useState(null);
   const [selLiuNian, setSelLiuNian] = useState(null);
 
+  // 点大运：切换大运，同时清掉流年
+  const onSelectDaYun = (idx) => {
+    setSelDaYun(idx);
+    setSelLiuNian(null);
+  };
+
+  // 点流年：选中流年，并把大运自动同步到该流年所在那一步
+  const onSelectLiuNian = (idx) => {
+    setSelLiuNian(idx);
+    if (idx == null || !luck || !submitted) return;
+    const year = new Date().getFullYear() + idx;
+    const age = year - submitted.year;
+    const cycleIdx = luck.cycles.findIndex(
+      (c) => age >= c.ageStart && age < c.ageEnd
+    );
+    setSelDaYun(cycleIdx >= 0 ? cycleIdx : null);
+  };
+
   const groupedPlaces = useMemo(() => {
     const out = {};
     for (const p of BIRTH_PLACES) (out[p.group] ||= []).push(p);
@@ -162,14 +180,14 @@ export default function BaziPage() {
             luck={luck}
             form={submitted}
             selectedIdx={selDaYun}
-            onSelect={setSelDaYun}
+            onSelect={onSelectDaYun}
           />
           <LiuNianPanel
             result={result}
             luck={luck}
             form={submitted}
             selectedIdx={selLiuNian}
-            onSelect={setSelLiuNian}
+            onSelect={onSelectLiuNian}
             selectedDaYunIdx={selDaYun}
           />
         </section>
