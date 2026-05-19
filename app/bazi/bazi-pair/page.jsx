@@ -4,11 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   calculateBazi,
-  computeRelations,
   BIRTH_PLACES,
 } from "@/lib/bazi";
 import { InputForm } from "@/components/bazi/InputForm";
 import { PillarTable } from "@/components/bazi/PillarTable";
+import { PairAnalysis } from "@/components/bazi/PairAnalysis";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -115,11 +115,6 @@ export default function BaziPairPage() {
   const nameA = (submittedA?.name && submittedA.name.trim()) || "甲方";
   const nameB = (submittedB?.name && submittedB.name.trim()) || "乙方";
 
-  const pairRelations = useMemo(() => {
-    if (!resultA || !resultB) return null;
-    return computePairRelations(resultA, resultB);
-  }, [resultA, resultB]);
-
   return (
     <div className="relative">
       <div
@@ -200,7 +195,12 @@ export default function BaziPairPage() {
             </div>
           </div>
 
-          <PairRelationsPanel relations={pairRelations} nameA={nameA} nameB={nameB} />
+          <PairAnalysis
+            resultA={resultA}
+            resultB={resultB}
+            formA={submittedA}
+            formB={submittedB}
+          />
         </section>
       )}
     </div>
@@ -220,95 +220,6 @@ function InputFormBare({ form, update, groupedPlaces }) {
       />
     </div>
   );
-}
-
-function PairRelationsPanel({ relations, nameA, nameB }) {
-  if (!relations) return null;
-  const sections = [
-    { key: "stem", title: "天干合", items: relations.stemCombos, tone: "bg-sage-50" },
-    { key: "liuhe", title: "地支六合", items: relations.liuhe, tone: "bg-sage-50" },
-    { key: "sanhe", title: "地支三合", items: relations.sanhe, tone: "bg-sage-50" },
-    { key: "sanhui", title: "地支三会", items: relations.sanhui, tone: "bg-sage-50" },
-    { key: "chong", title: "地支六冲", items: relations.chong, tone: "bg-rose-50" },
-    { key: "xing", title: "地支相刑", items: relations.xing, tone: "bg-rose-50" },
-    { key: "hai", title: "地支相害", items: relations.hai, tone: "bg-rose-50" },
-  ];
-  const total = sections.reduce((a, s) => a + s.items.length, 0);
-  const labelMap = {
-    A年: `${nameA}·年柱`, A月: `${nameA}·月柱`, A日: `${nameA}·日柱`, A时: `${nameA}·时柱`,
-    B年: `${nameB}·年柱`, B月: `${nameB}·月柱`, B日: `${nameB}·日柱`, B时: `${nameB}·时柱`,
-  };
-
-  return (
-    <Card className="mt-6 p-6">
-      <div className="flex items-baseline justify-between">
-        <h2 className="font-serif text-xl font-semibold">两盘之间的合冲刑害</h2>
-        <span className="text-xs text-muted-foreground">
-          {total === 0 ? "两盘相安" : `共 ${total} 项`}
-        </span>
-      </div>
-      {total === 0 ? (
-        <p className="mt-3 text-sm text-muted-foreground">
-          两人天干无合、地支无合、冲、刑、害。
-        </p>
-      ) : (
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {sections
-            .filter((s) => s.items.length > 0)
-            .map((s) => (
-              <div
-                key={s.key}
-                className={`rounded-md border border-border p-3 ${s.tone}`}
-              >
-                <h3 className="text-sm font-medium text-foreground">{s.title}</h3>
-                <ul className="mt-2 space-y-2 text-sm">
-                  {s.items.map((it, i) => (
-                    <li key={i} className="flex flex-wrap items-baseline gap-x-2">
-                      <span className="text-foreground">{it.name}</span>
-                      {it.complete === false && (
-                        <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                          半合
-                        </span>
-                      )}
-                      <span className="text-xs text-muted-foreground">
-                        {it.positions.map((p) => labelMap[p] || p).join(" · ")}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-        </div>
-      )}
-    </Card>
-  );
-}
-
-// 仅保留跨盘项：positions 中同时包含 A* 和 B* 标签
-function computePairRelations(resultA, resultB) {
-  const pillars = [
-    { stem: resultA.year.stem, branch: resultA.year.branch, label: "A年" },
-    { stem: resultA.month.stem, branch: resultA.month.branch, label: "A月" },
-    { stem: resultA.day.stem, branch: resultA.day.branch, label: "A日" },
-    { stem: resultA.hour.stem, branch: resultA.hour.branch, label: "A时" },
-    { stem: resultB.year.stem, branch: resultB.year.branch, label: "B年" },
-    { stem: resultB.month.stem, branch: resultB.month.branch, label: "B月" },
-    { stem: resultB.day.stem, branch: resultB.day.branch, label: "B日" },
-    { stem: resultB.hour.stem, branch: resultB.hour.branch, label: "B时" },
-  ];
-  const raw = computeRelations(pillars);
-  const isCross = (positions) =>
-    positions.some((p) => p.startsWith("A")) &&
-    positions.some((p) => p.startsWith("B"));
-  return {
-    stemCombos: raw.stemCombos.filter((it) => isCross(it.positions)),
-    liuhe: raw.liuhe.filter((it) => isCross(it.positions)),
-    sanhe: raw.sanhe.filter((it) => isCross(it.positions)),
-    sanhui: raw.sanhui.filter((it) => isCross(it.positions)),
-    chong: raw.chong.filter((it) => isCross(it.positions)),
-    hai: raw.hai.filter((it) => isCross(it.positions)),
-    xing: raw.xing.filter((it) => isCross(it.positions)),
-  };
 }
 
 function placeFromForm(form) {
