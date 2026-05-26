@@ -74,6 +74,16 @@ export default function BaziPage() {
 
   const pairHref = useMemo(() => buildPairHref(form), [form]);
 
+  // Nominatim 搜索选中后：切到自定义模式，并写入经度/时区
+  const onSearchPick = ({ lon, tz }) => {
+    setForm((f) => ({
+      ...f,
+      placeId: "__custom__",
+      customLon: String(lon.toFixed(2)),
+      customTz: String(tz),
+    }));
+  };
+
   const update = (field) => (e) => {
     const t = e.target;
     const v =
@@ -161,12 +171,20 @@ export default function BaziPage() {
           <h1 className="font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             八字排盘
           </h1>
-          <Link
-            href={pairHref}
-            className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            八字合盘 →
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/bazi/reference"
+              className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              命理参考 →
+            </Link>
+            <Link
+              href={pairHref}
+              className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              八字合盘 →
+            </Link>
+          </div>
         </div>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           填入阳历出生年月日时分与出生地点，自动按真太阳时（经度时差 + 均时差）
@@ -178,6 +196,7 @@ export default function BaziPage() {
           update={update}
           groupedPlaces={groupedPlaces}
           onSubmit={onSubmit}
+          onSearchPick={onSearchPick}
         />
       </section>
 

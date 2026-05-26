@@ -58,12 +58,28 @@ export function ExternalRelationsCard({
     ...externals.map((e) => ({ label: e.label, branch: e.branch })),
   ];
 
+  const baseStems = [
+    result.year.stem, result.month.stem, result.day.stem, result.hour.stem,
+  ];
+
   const details = externals.map((ext) => {
     const stemEl = STEM_ELEMENT[ext.stem];
-    // 落根：检查除自身之外的所有支，本柱地支单独标注
-    const otherBranches = allBranches.filter((b) => b.label !== ext.label);
-    const externalRoots = findRoots(stemEl, otherBranches);
-    const selfRoot = findRoots(stemEl, [{ label: ext.label, branch: ext.branch }]);
+    // 分别判定：命局是否"透"该五行（天干层）vs 是否"有根"（地支藏干层）
+    const transparentInBase = baseStems.some((s) => STEM_ELEMENT[s] === stemEl);
+    const baseRoots = findRoots(stemEl, baseBranches);
+    const rootedInBase = baseRoots.length > 0;
+    // 外柱（自坐 + 同时入命的运/岁）地支藏干提供的根
+    const extRoots = findRoots(
+      stemEl,
+      allBranches.filter((b) =>
+        !baseBranches.some((bb) => bb.label === b.label),
+      ),
+    );
+    // 外柱本身带的天干 → 自动补透（仅当命局不透时算作"新加")
+    const addsTransparent = !transparentInBase;
+    // 外柱地支藏干补根（仅当命局无根时算作"新加")
+    const addsRoot = !rootedInBase && extRoots.length > 0;
+
     const hidden = BRANCH_HIDDEN_STEMS[ext.branch].map((s, i) => ({
       stem: s,
       element: STEM_ELEMENT[s],
@@ -77,8 +93,12 @@ export function ExternalRelationsCard({
       stemEl,
       stemTenGod: tenGodOf(dayStem, ext.stem),
       hidden,
-      externalRoots,
-      selfRoot: selfRoot[0] || null,
+      transparentInBase,
+      rootedInBase,
+      baseRoots,
+      extRoots,
+      addsTransparent,
+      addsRoot,
     };
   });
 
@@ -123,33 +143,66 @@ export function ExternalRelationsCard({
             </div>
 
             <div className="mt-2 space-y-1.5 text-xs">
-              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-muted-foreground">天干落根：</span>
-                <span
-                  className={`rounded px-1.5 py-0.5 text-[10px] ${ELEMENT_COLOR[d.stemEl] || ""}`}
-                >
-                  {HEAVENLY_STEMS[d.stem]} · {d.stemEl}
-                </span>
-                {d.selfRoot && (
-                  <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900">
-                    自坐{d.selfRoot.posLabel}（{ROOT_STRENGTH[d.selfRoot.position]}）
-                  </span>
-                )}
-                {d.externalRoots.map((r, k) => (
-                  <span
-                    key={k}
-                    className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900"
-                    title={`${FULL_NAME[r.pillar] || r.pillar}支 ${EARTHLY_BRANCHES[r.branch]} 藏 ${HEAVENLY_STEMS[BRANCH_HIDDEN_STEMS[r.branch][r.position]]}`}
-                  >
-                    {FULL_NAME[r.pillar] || r.pillar}·{r.posLabel}
-                  </span>
-                ))}
-                {d.externalRoots.length === 0 && !d.selfRoot && (
-                  <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                    无根
-                  </span>
-                )}
-              </div>
+              {(() => {
+                // 仅在命局缺一/缺两项（不透 或 无根）且外柱补上时显示
+                if (!d.addsTransparent && !d.addsRoot) return null;
+                const label =
+                  d.addsTransparent && d.addsRoot
+                    ? "补透补根"
+                    : d.addsTransparent
+                      ? "补透"
+                      : "补根";
+                const baseStateText =
+                  d.transparentInBase && !d.rootedInBase
+                    ? "命局透干无根"
+                    : !d.transparentInBase && d.rootedInBase
+                      ? "命局有根不透"
+                      : "命局不透无根";
+                return (
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="text-muted-foreground">天干{label}：</span>
+                    <span
+                      className={`rounded px-1.5 py-0.5 text-[10px] ${ELEMENT_COLOR[d.stemEl] || ""}`}
+                    >
+                      {HEAVENLY_STEMS[d.stem]} · {d.stemEl}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground">
+                      {baseStateText} →
+                    </span>
+                    {d.addsTransparent && (
+                      <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900">
+                        外柱透出
+                      </span>
+                    )}
+                    {d.baseRoots.map((r, k) => (
+                      <span
+                        key={`b${k}`}
+                        className="rounded bg-sky-100 px-1.5 py-0.5 text-[10px] text-sky-900"
+                        title={`${FULL_NAME[r.pillar]}支 ${EARTHLY_BRANCHES[r.branch]} 藏 ${HEAVENLY_STEMS[BRANCH_HIDDEN_STEMS[r.branch][r.position]]}（命局原有根）`}
+                      >
+                        命局·{FULL_NAME[r.pillar]}·{r.posLabel}
+                      </span>
+                    ))}
+                    {d.extRoots.map((r, k) => {
+                      const isSelf = r.pillar === d.label;
+                      return (
+                        <span
+                          key={`e${k}`}
+                          className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900"
+                          title={`${FULL_NAME[r.pillar] || r.pillar}支 ${EARTHLY_BRANCHES[r.branch]} 藏 ${HEAVENLY_STEMS[BRANCH_HIDDEN_STEMS[r.branch][r.position]]}`}
+                        >
+                          {isSelf ? "自坐" : (FULL_NAME[r.pillar] || r.pillar)}·{r.posLabel}（{ROOT_STRENGTH[r.position]}）
+                        </span>
+                      );
+                    })}
+                    {!d.rootedInBase && d.extRoots.length === 0 && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                        仍无根 · 浮干
+                      </span>
+                    )}
+                  </div>
+                );
+              })()}
 
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <span className="text-muted-foreground">

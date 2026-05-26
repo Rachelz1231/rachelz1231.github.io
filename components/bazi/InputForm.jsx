@@ -3,9 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Field } from "./Field";
+import { PlaceSearch } from "./PlaceSearch";
 import { inputCls, fmtUtc } from "./shared";
 
-export function InputForm({ form, update, groupedPlaces, onSubmit }) {
+export function InputForm({ form, update, groupedPlaces, onSubmit, onSearchPick }) {
   return (
     <Card className="mt-8 p-6 sm:p-8">
       <form
@@ -80,23 +81,26 @@ export function InputForm({ form, update, groupedPlaces, onSubmit }) {
         </Field>
 
         <Field label="出生地点" className="col-span-2 sm:col-span-4">
-          <select
-            value={form.placeId}
-            onChange={update("placeId")}
-            className={inputCls}
-          >
-            {Object.entries(groupedPlaces).map(([group, list]) => (
-              <optgroup key={group} label={group}>
-                {list.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}（{p.lon > 0 ? "东经" : "西经"}
-                    {Math.abs(p.lon).toFixed(2)}°，{fmtUtc(p.tzMeridian)}）
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-            <option value="__custom__">自定义…</option>
-          </select>
+          <div className="space-y-2">
+            <PlaceSearch onPick={onSearchPick} />
+            <select
+              value={form.placeId}
+              onChange={update("placeId")}
+              className={inputCls}
+            >
+              {Object.entries(groupedPlaces).map(([group, list]) => (
+                <optgroup key={group} label={group}>
+                  {list.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}（{p.lon > 0 ? "东经" : "西经"}
+                      {Math.abs(p.lon).toFixed(2)}°，{fmtUtc(p.tzMeridian)}）
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+              <option value="__custom__">自定义…</option>
+            </select>
+          </div>
         </Field>
 
         <Field
