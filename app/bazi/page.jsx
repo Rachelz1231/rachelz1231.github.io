@@ -172,12 +172,15 @@ export default function BaziPage() {
             八字排盘
           </h1>
           <div className="flex flex-wrap gap-2">
-            <Link
+            <a
               href="/bazi/reference"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+              title="在新标签页打开，不影响当前排盘"
             >
-              命理参考 →
-            </Link>
+              命理参考 ↗
+            </a>
             <Link
               href={pairHref}
               className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"

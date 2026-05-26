@@ -8,6 +8,7 @@ import { BranchHiddenStems } from "@/components/bazi/reference/BranchHiddenStems
 import { TenGodsTable } from "@/components/bazi/reference/TenGodsTable";
 import { TenGodsSystem } from "@/components/bazi/reference/TenGodsSystem";
 import { SpousePalace } from "@/components/bazi/reference/SpousePalace";
+import { MarriageRisk } from "@/components/bazi/reference/MarriageRisk";
 import { GeJuOverview } from "@/components/bazi/reference/GeJuOverview";
 import { JianluGeDetail } from "@/components/bazi/reference/JianluGeDetail";
 import { OtherGeJuDetail } from "@/components/bazi/reference/OtherGeJuDetail";
@@ -43,6 +44,12 @@ const SECTIONS = [
     title: "夫妻宫 · 配偶星",
     summary: "日支看相处，财官看本人，运岁看时机",
     render: () => <SpousePalace />,
+  },
+  {
+    id: "marriage-risk",
+    title: "婚姻风险信号 · 孽缘判断",
+    summary: "四大维度 + 「剪不断理还乱」专题（合刑同根、自合日柱、合而不化）",
+    render: () => <MarriageRisk />,
   },
   {
     id: "geju-overview",
