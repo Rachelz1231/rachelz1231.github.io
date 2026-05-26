@@ -13,6 +13,10 @@ import {
   tenGodOf,
 } from "@/lib/bazi";
 import { ELEMENT_COLOR } from "./shared";
+import { PairSummary } from "./pair/PairSummary";
+import { YongShenPanel } from "./pair/YongShenPanel";
+import { CrossShenshaPanel } from "./pair/CrossShenshaPanel";
+import { RelationshipTimeline } from "./pair/RelationshipTimeline";
 
 // 五合 / 六合 配对（合的"化神"在合盘里只作牵引信号，不评价化）
 const STEM_COMBO_PAIRS = [
@@ -48,6 +52,11 @@ export function PairAnalysis({ resultA, resultB, formA, formB }) {
         </ToggleButton>
       </Card>
 
+      <PairSummary
+        resultA={resultA} resultB={resultB}
+        nameA={nameA} nameB={nameB}
+      />
+
       <DayPillarPanel
         resultA={resultA} resultB={resultB}
         nameA={nameA} nameB={nameB} mode={mode}
@@ -65,8 +74,21 @@ export function PairAnalysis({ resultA, resultB, formA, formB }) {
         resultA={resultA} resultB={resultB}
         nameA={nameA} nameB={nameB}
       />
+      <YongShenPanel
+        resultA={resultA} resultB={resultB}
+        nameA={nameA} nameB={nameB}
+      />
+      <CrossShenshaPanel
+        resultA={resultA} resultB={resultB}
+        nameA={nameA} nameB={nameB}
+      />
       <OverallRelationsPanel
         resultA={resultA} resultB={resultB}
+        nameA={nameA} nameB={nameB}
+      />
+      <RelationshipTimeline
+        resultA={resultA} resultB={resultB}
+        formA={formA} formB={formB}
         nameA={nameA} nameB={nameB}
       />
     </>
