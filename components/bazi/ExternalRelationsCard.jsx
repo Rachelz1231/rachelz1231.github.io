@@ -1,10 +1,41 @@
-import { analyzeWithExternals } from "@/lib/bazi";
+import {
+  analyzeWithExternals,
+  HEAVENLY_STEMS, EARTHLY_BRANCHES,
+  STEM_ELEMENT,
+  BRANCH_HIDDEN_STEMS,
+  tenGodOf,
+} from "@/lib/bazi";
 import { StemComboItem } from "./StemComboItem";
+import { ELEMENT_COLOR } from "./shared";
 
 const FULL_NAME = {
   年: "年柱", 月: "月柱", 日: "日柱", 时: "时柱",
   运: "大运", 岁: "流年",
 };
+
+const ROOT_LABELS = ["本气", "中气", "余气"];
+const ROOT_STRENGTH = ["强根", "中根", "弱根"];
+
+// 检查外柱天干在所有可用地支（命局四柱 + 所有外柱）中的落根情况。
+// 返回每条根：{ pillar, branch, position, posLabel } —— position 是藏干索引（0=本气）
+function findRoots(stemEl, branches) {
+  const roots = [];
+  for (const b of branches) {
+    const hidden = BRANCH_HIDDEN_STEMS[b.branch];
+    for (let i = 0; i < hidden.length; i++) {
+      if (STEM_ELEMENT[hidden[i]] === stemEl) {
+        roots.push({
+          pillar: b.label,
+          branch: b.branch,
+          position: i,
+          posLabel: ROOT_LABELS[i],
+        });
+        break; // 同一支只算一次，取最强（本气优先）
+      }
+    }
+  }
+  return roots;
+}
 
 // 命局四柱 + 一/多个外柱（大运/流年）的合冲刑害展示。
 //   externals: [{ stem, branch, label }]
@@ -13,6 +44,44 @@ export function ExternalRelationsCard({
   result, externals, headerTitle, headerSub, externalLabel,
 }) {
   const rel = analyzeWithExternals(result, externals);
+  const dayStem = result.day.stem;
+
+  // 四柱基础 + 全部外柱（含本柱）用于落根判定
+  const baseBranches = [
+    { label: "年", branch: result.year.branch },
+    { label: "月", branch: result.month.branch },
+    { label: "日", branch: result.day.branch },
+    { label: "时", branch: result.hour.branch },
+  ];
+  const allBranches = [
+    ...baseBranches,
+    ...externals.map((e) => ({ label: e.label, branch: e.branch })),
+  ];
+
+  const details = externals.map((ext) => {
+    const stemEl = STEM_ELEMENT[ext.stem];
+    // 落根：检查除自身之外的所有支，本柱地支单独标注
+    const otherBranches = allBranches.filter((b) => b.label !== ext.label);
+    const externalRoots = findRoots(stemEl, otherBranches);
+    const selfRoot = findRoots(stemEl, [{ label: ext.label, branch: ext.branch }]);
+    const hidden = BRANCH_HIDDEN_STEMS[ext.branch].map((s, i) => ({
+      stem: s,
+      element: STEM_ELEMENT[s],
+      tenGod: tenGodOf(dayStem, s),
+      posLabel: ROOT_LABELS[i],
+    }));
+    return {
+      label: ext.label,
+      stem: ext.stem,
+      branch: ext.branch,
+      stemEl,
+      stemTenGod: tenGodOf(dayStem, ext.stem),
+      hidden,
+      externalRoots,
+      selfRoot: selfRoot[0] || null,
+    };
+  });
+
   const sections = [
     { key: "stem",   title: "天干合化", items: rel.stemCombos, tone: "bg-sage-50" },
     { key: "liuhe",  title: "地支六合", items: rel.liuhe,      tone: "bg-sage-50" },
@@ -37,12 +106,82 @@ export function ExternalRelationsCard({
             : "无关联"}
         </span>
       </div>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        {details.map((d) => (
+          <div
+            key={d.label}
+            className="rounded-md border border-border bg-background/60 p-3"
+          >
+            <div className="flex items-baseline gap-2">
+              <span className="rounded bg-primary/15 px-1.5 py-0.5 text-[11px] font-medium text-primary">
+                {FULL_NAME[d.label] || d.label}
+              </span>
+              <span className="font-serif text-base font-semibold">
+                {HEAVENLY_STEMS[d.stem]}{EARTHLY_BRANCHES[d.branch]}
+              </span>
+              <span className="text-xs text-muted-foreground">{d.stemTenGod}</span>
+            </div>
+
+            <div className="mt-2 space-y-1.5 text-xs">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="text-muted-foreground">天干落根：</span>
+                <span
+                  className={`rounded px-1.5 py-0.5 text-[10px] ${ELEMENT_COLOR[d.stemEl] || ""}`}
+                >
+                  {HEAVENLY_STEMS[d.stem]} · {d.stemEl}
+                </span>
+                {d.selfRoot && (
+                  <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900">
+                    自坐{d.selfRoot.posLabel}（{ROOT_STRENGTH[d.selfRoot.position]}）
+                  </span>
+                )}
+                {d.externalRoots.map((r, k) => (
+                  <span
+                    key={k}
+                    className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-900"
+                    title={`${FULL_NAME[r.pillar] || r.pillar}支 ${EARTHLY_BRANCHES[r.branch]} 藏 ${HEAVENLY_STEMS[BRANCH_HIDDEN_STEMS[r.branch][r.position]]}`}
+                  >
+                    {FULL_NAME[r.pillar] || r.pillar}·{r.posLabel}
+                  </span>
+                ))}
+                {d.externalRoots.length === 0 && !d.selfRoot && (
+                  <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                    无根
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="text-muted-foreground">
+                  地支 {EARTHLY_BRANCHES[d.branch]} 藏干：
+                </span>
+                {d.hidden.map((h, k) => (
+                  <span
+                    key={k}
+                    className="inline-flex items-baseline gap-1"
+                  >
+                    <span
+                      className={`rounded px-1 py-0.5 text-[11px] font-medium ${ELEMENT_COLOR[h.element] || ""}`}
+                    >
+                      {HEAVENLY_STEMS[h.stem]}
+                    </span>
+                    <span className="text-[10px] text-muted-foreground">
+                      {h.posLabel}·{h.tenGod}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {!rel.hasAny ? (
         <p className="mt-3 text-sm text-muted-foreground">
           与命局四柱{externals.length > 1 ? "及大运" : ""}无明显合冲刑害。
         </p>
       ) : (
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {sections
             .filter((s) => s.items.length > 0)
             .map((s) => (
