@@ -1,8 +1,10 @@
 // 单条天干合化的展示：化成 / 只合不化 / 争合不化 / 合·扰动 + 条件勾叉。
 
+import { ColoredName } from "./ColoredName";
+
 const FULL_NAME = {
   年: "年柱", 月: "月柱", 日: "日柱", 时: "时柱",
-  运: "大运", 岁: "流年",
+  运: "大运", 岁: "流年", 流月: "流月",
 };
 
 function pickBadge(hua) {
@@ -33,7 +35,7 @@ export function StemComboItem({ item, externalLabel }) {
   return (
     <li className="space-y-1">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="text-foreground">{displayName}</span>
+        <ColoredName text={displayName} className="text-foreground" />
         <span
           className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${badge.cls}`}
         >

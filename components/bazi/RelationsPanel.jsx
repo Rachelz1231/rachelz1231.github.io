@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { StemComboItem } from "./StemComboItem";
+import { ColoredName } from "./ColoredName";
 
 const FULL_NAME = { 年: "年柱", 月: "月柱", 日: "日柱", 时: "时柱" };
 
@@ -47,7 +48,7 @@ export function RelationsPanel({ relations }) {
                       ))
                     : s.items.map((it, i) => (
                         <li key={i} className="flex flex-wrap items-baseline gap-x-2">
-                          <span className="text-foreground">{it.name}</span>
+                          <ColoredName text={it.name} className="text-foreground" />
                           {it.complete === false && (
                             <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
                               半合

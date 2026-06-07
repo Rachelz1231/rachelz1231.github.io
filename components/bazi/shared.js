@@ -16,6 +16,15 @@ export const ELEMENT_COLOR = {
   水: "bg-sky-100 text-sky-800",
 };
 
+// 仅着色的版本：用于在文字串内高亮天干/地支字
+export const ELEMENT_TEXT_COLOR = {
+  木: "text-sage-800",
+  火: "text-rose-700",
+  土: "text-[#8b6f47]",
+  金: "text-yellow-800",
+  水: "text-sky-700",
+};
+
 // 大运 / 流年表格的行高样式
 export const COL_ROW_TEXT = "flex min-h-[36px] items-center justify-center px-1 text-xs sm:text-sm";
 export const COL_ROW_GLYPH = "flex min-h-[72px] items-center justify-center px-1";

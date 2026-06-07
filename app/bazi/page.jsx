@@ -19,6 +19,7 @@ import { StrengthPanel } from "@/components/bazi/StrengthPanel";
 import { ElementsPanel } from "@/components/bazi/ElementsPanel";
 import { DaYunPanel } from "@/components/bazi/DaYunPanel";
 import { LiuNianPanel } from "@/components/bazi/LiuNianPanel";
+import { LiuYuePanel } from "@/components/bazi/LiuYuePanel";
 
 const DEFAULT_FORM = {
   name: "",
@@ -45,16 +46,19 @@ export default function BaziPage() {
   const [submitted, setSubmitted] = useState(null);
   const [selDaYun, setSelDaYun] = useState(null);
   const [selLiuNian, setSelLiuNian] = useState(null);
+  const [selLiuYue, setSelLiuYue] = useState(null);
 
-  // 点大运：切换大运，同时清掉流年
+  // 点大运：切换大运，同时清掉流年/流月
   const onSelectDaYun = (idx) => {
     setSelDaYun(idx);
     setSelLiuNian(null);
+    setSelLiuYue(null);
   };
 
-  // 点流年：选中流年，并把大运自动同步到该流年所在那一步
+  // 点流年：选中流年，并把大运自动同步到该流年所在那一步；切流年清掉流月
   const onSelectLiuNian = (idx) => {
     setSelLiuNian(idx);
+    setSelLiuYue(null);
     if (idx == null || !luck || !submitted) return;
     const year = new Date().getFullYear() + idx;
     const age = year - submitted.year;
@@ -63,6 +67,8 @@ export default function BaziPage() {
     );
     setSelDaYun(cycleIdx >= 0 ? cycleIdx : null);
   };
+
+  const onSelectLiuYue = (idx) => setSelLiuYue(idx);
 
   const groupedPlaces = useMemo(() => {
     const out = {};
@@ -137,6 +143,7 @@ export default function BaziPage() {
     setSubmitted({ ...formData, place: p });
     setSelDaYun(null);
     setSelLiuNian(null);
+    setSelLiuYue(null);
     return true;
   };
 
@@ -225,6 +232,17 @@ export default function BaziPage() {
             onSelect={onSelectLiuNian}
             selectedDaYunIdx={selDaYun}
           />
+          {selLiuNian != null && (
+            <LiuYuePanel
+              result={result}
+              luck={luck}
+              form={submitted}
+              liuNianYear={new Date().getFullYear() + selLiuNian}
+              selectedIdx={selLiuYue}
+              onSelect={onSelectLiuYue}
+              selectedDaYunIdx={selDaYun}
+            />
+          )}
         </section>
       )}
     </div>
