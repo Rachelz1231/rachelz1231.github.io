@@ -20,6 +20,7 @@ import { ElementsPanel } from "@/components/bazi/ElementsPanel";
 import { DaYunPanel } from "@/components/bazi/DaYunPanel";
 import { LiuNianPanel } from "@/components/bazi/LiuNianPanel";
 import { LiuYuePanel } from "@/components/bazi/LiuYuePanel";
+import { MonthlyForecast } from "@/components/bazi/MonthlyForecast";
 
 const DEFAULT_FORM = {
   name: "",
@@ -233,15 +234,25 @@ export default function BaziPage() {
             selectedDaYunIdx={selDaYun}
           />
           {selLiuNian != null && (
-            <LiuYuePanel
-              result={result}
-              luck={luck}
-              form={submitted}
-              liuNianYear={new Date().getFullYear() + selLiuNian}
-              selectedIdx={selLiuYue}
-              onSelect={onSelectLiuYue}
-              selectedDaYunIdx={selDaYun}
-            />
+            <>
+              <LiuYuePanel
+                result={result}
+                luck={luck}
+                form={submitted}
+                liuNianYear={new Date().getFullYear() + selLiuNian}
+                selectedIdx={selLiuYue}
+                onSelect={onSelectLiuYue}
+                selectedDaYunIdx={selDaYun}
+              />
+              <MonthlyForecast
+                result={result}
+                luck={luck}
+                form={submitted}
+                liuNianYear={new Date().getFullYear() + selLiuNian}
+                selectedLiuYueIdx={selLiuYue}
+                selectedDaYunIdx={selDaYun}
+              />
+            </>
           )}
         </section>
       )}
