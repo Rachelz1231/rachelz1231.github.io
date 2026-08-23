@@ -2,6 +2,18 @@ import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { getTour, routeOf, tours, tourStatusLabels } from "@/lib/tours";
 import { RouteMap } from "@/components/tour_guide/RouteMap";
+import { RouteImage } from "@/components/tour_guide/RouteImage";
+
+// 所有段都能解析出公里数才返回合计，否则返回 null —— 宁可不显示也不猜。
+function sumKm(legs) {
+  let total = 0;
+  for (const leg of legs) {
+    const match = /^([\d.]+)\s*km$/i.exec(leg.distance ?? "");
+    if (!match) return null;
+    total += Number(match[1]);
+  }
+  return Math.round(total);
+}
 
 export function generateStaticParams() {
   return tours.map((tour) => ({ slug: tour.slug }));
@@ -13,23 +25,27 @@ export function generateMetadata({ params }) {
   return { title: tour.title, description: tour.summary };
 }
 
+// 横向链条：起点 —106 km · 1h22→ 下一站 —…→ …
+// 比竖排列表紧凑，且一眼能看出当天的位移顺序。
 function DayLegs({ legs }) {
+  const total = sumKm(legs);
   return (
-    <ul className="mt-3 space-y-1">
-      {legs.map((leg) => (
-        <li
-          key={`${leg.from}-${leg.to}`}
-          className="flex flex-wrap items-baseline gap-x-2 text-sm"
-        >
-          <span className="text-foreground/80">
-            {leg.from} → {leg.to}
+    <div className="mt-3">
+      <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm">
+        <span className="font-medium text-foreground">{legs[0].from}</span>
+        {legs.map((leg) => (
+          <span key={`${leg.from}-${leg.to}`} className="contents">
+            <span className="text-xs text-primary">
+              —{leg.distance} · {leg.duration}→
+            </span>
+            <span className="font-medium text-foreground">{leg.to}</span>
           </span>
-          <span className="text-xs text-muted-foreground">
-            {leg.distance} · {leg.duration}
-          </span>
-        </li>
-      ))}
-    </ul>
+        ))}
+      </p>
+      {total && legs.length > 1 ? (
+        <p className="mt-1 text-xs text-muted-foreground">当天合计 {total} km</p>
+      ) : null}
+    </div>
   );
 }
 
@@ -133,6 +149,8 @@ export default function TourPage({ params }) {
       </div>
       <p className="mt-2 text-sm text-muted-foreground">{tour.dates}</p>
       <p className="mt-4 max-w-2xl text-muted-foreground">{tour.summary}</p>
+
+      {tour.map ? <RouteImage map={tour.map} /> : null}
 
       {route ? <RouteMap route={route} /> : null}
 
