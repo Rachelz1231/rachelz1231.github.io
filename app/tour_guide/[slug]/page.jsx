@@ -55,9 +55,9 @@ function DayOptions({ options }) {
   return (
     <div className="mt-4">
       <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-        二选一{options.note ? ` · ${options.note}` : ""}
+        可选方案{options.note ? ` · ${options.note}` : ""}
       </p>
-      <div className="mt-2 grid gap-3 sm:grid-cols-2">
+      <div className="mt-2 space-y-2">
         {options.choices.map((choice) => (
           <div
             key={choice.label}
