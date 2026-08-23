@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { notFound } from "next/navigation";
-import { getTour, tours, tourStatusLabels } from "@/lib/tours";
+import { getTour, routeOf, tours, tourStatusLabels } from "@/lib/tours";
+import { RouteMap } from "@/components/tour_guide/RouteMap";
 
 export function generateStaticParams() {
   return tours.map((tour) => ({ slug: tour.slug }));
@@ -112,6 +113,7 @@ export default function TourPage({ params }) {
   const tour = getTour(params.slug);
   if (!tour) notFound();
 
+  const route = routeOf(tour);
   const flexible = tour.flexible ?? [];
   const unpinned = flexible.filter((entry) => !entry.after);
   const pinnedAfter = (date) => flexible.filter((entry) => entry.after === date);
@@ -131,6 +133,8 @@ export default function TourPage({ params }) {
       </div>
       <p className="mt-2 text-sm text-muted-foreground">{tour.dates}</p>
       <p className="mt-4 max-w-2xl text-muted-foreground">{tour.summary}</p>
+
+      {route ? <RouteMap route={route} /> : null}
 
       {unpinned.length ? <FlexibleBlock flexible={unpinned} /> : null}
 
