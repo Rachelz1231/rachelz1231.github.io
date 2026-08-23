@@ -81,7 +81,9 @@ function DayOptions({ options }) {
             className="rounded-md border border-border/80 px-4 py-3"
           >
             <p className="text-sm font-medium text-foreground">{choice.label}</p>
-            <p className="mt-1 text-sm text-muted-foreground">{choice.detail}</p>
+            {choice.detail ? (
+              <p className="mt-1 text-sm text-muted-foreground">{choice.detail}</p>
+            ) : null}
           </div>
         ))}
       </div>
