@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+  阿勒泰环线示意图的源文件。改完用下面这条命令重新生成 PNG：
+
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+    --headless --disable-gpu --hide-scrollbars --window-size=1000,620 \
+    --force-device-scale-factor=2 \
+    --screenshot=public/tour_guide/altay-route.png \
+    "file://$PWD/scripts/altay-route.html"
+
+  点位是按实际方位摆的示意图，不是等比例地图。
+-->
+<html lang="zh">
+<head><meta charset="utf-8">
+<style>
+  html,body { margin:0; padding:0; background:#FDFDF7; }
+  svg { display:block; font-family:"PingFang SC","Helvetica Neue",sans-serif; }
+  .stop  { font-size:17px; font-weight:600; fill:#1F2314; }
+  .aside { font-size:15px; font-weight:500; fill:#62675B; }
+  .leg   { font-size:13px; fill:#5C6B38; }
+  .hint  { font-size:12px; fill:#8A8F80; }
+  .title { font-size:20px; font-weight:600; fill:#1F2314; }
+  .sub   { font-size:13px; fill:#8A8F80; }
+</style></head>
+<body>
+<svg width="1000" height="620" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="620" fill="#FDFDF7"/>
+
+  <text class="title" x="56" y="60">新疆阿勒泰环线</text>
+  <text class="sub"   x="56" y="84">2026-09-05 – 09-11 · 自驾 · 全程约 651 km</text>
+
+  <!-- 环线 -->
+  <polyline
+    points="810,450 355,530 325,455 165,300 205,145 530,175 810,450"
+    fill="none" stroke="#5C6B38" stroke-width="3"
+    stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- 喀纳斯：从白哈巴坐大巴进景区，不是自驾段，用虚线区分 -->
+  <line x1="205" y1="145" x2="360" y2="108"
+        stroke="#9AA487" stroke-width="2" stroke-dasharray="5 5"/>
+  <circle cx="360" cy="108" r="6" fill="#FDFDF7" stroke="#9AA487" stroke-width="2"/>
+  <text class="aside" x="376" y="108" text-anchor="start" dominant-baseline="middle">喀纳斯景区</text>
+  <text class="hint"  x="278" y="112" text-anchor="middle">大巴 1h</text>
+
+  <!-- 途经点 -->
+  <circle cx="355" cy="530" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <circle cx="325" cy="455" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <circle cx="165" cy="300" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <circle cx="205" cy="145" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <circle cx="530" cy="175" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <!-- 起点 / 终点 -->
+  <circle cx="810" cy="450" r="8" fill="#5C6B38"/>
+
+  <text class="stop" x="836" y="450" dominant-baseline="middle">阿勒泰</text>
+  <text class="hint" x="836" y="470" dominant-baseline="middle">起点 / 终点</text>
+  <text class="stop" x="355" y="558" text-anchor="middle">布尔津</text>
+  <text class="stop" x="303" y="455" text-anchor="end" dominant-baseline="middle">五彩滩</text>
+  <text class="stop" x="143" y="300" text-anchor="end" dominant-baseline="middle">中哈边境大峡谷</text>
+  <text class="stop" x="205" y="122" text-anchor="middle">白哈巴</text>
+  <text class="stop" x="562" y="175" text-anchor="start" dominant-baseline="middle">禾木</text>
+
+  <!-- 各段里程 -->
+  <text class="leg" x="582" y="514" text-anchor="middle">106 km · 1h22</text>
+  <text class="leg" x="368" y="497" text-anchor="start">22 km · 23min</text>
+  <text class="leg" x="268" y="382" text-anchor="start">131 km · 2h16</text>
+  <text class="leg" x="163" y="228" text-anchor="end">12 km · 23min</text>
+  <text class="leg" x="367" y="196" text-anchor="middle">147 km · 3h15</text>
+  <text class="leg" x="692" y="318" text-anchor="start">233 km · 实测 6h</text>
+  <text class="hint" x="692" y="336" text-anchor="start">反穿阿禾公路</text>
+</svg>
+</body></html>

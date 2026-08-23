@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { notFound } from "next/navigation";
-import { getTour, routeOf, tours, tourStatusLabels } from "@/lib/tours";
-import { RouteMap } from "@/components/tour_guide/RouteMap";
+import { getTour, tours, tourStatusLabels } from "@/lib/tours";
 import { RouteImage } from "@/components/tour_guide/RouteImage";
 
 // 所有段都能解析出公里数才返回合计，否则返回 null —— 宁可不显示也不猜。
@@ -129,7 +128,6 @@ export default function TourPage({ params }) {
   const tour = getTour(params.slug);
   if (!tour) notFound();
 
-  const route = routeOf(tour);
   const flexible = tour.flexible ?? [];
   const unpinned = flexible.filter((entry) => !entry.after);
   const pinnedAfter = (date) => flexible.filter((entry) => entry.after === date);
@@ -151,8 +149,6 @@ export default function TourPage({ params }) {
       <p className="mt-4 max-w-2xl text-muted-foreground">{tour.summary}</p>
 
       {tour.map ? <RouteImage map={tour.map} /> : null}
-
-      {route ? <RouteMap route={route} /> : null}
 
       {unpinned.length ? <FlexibleBlock flexible={unpinned} /> : null}
 
