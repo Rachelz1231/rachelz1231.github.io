@@ -4,7 +4,7 @@ import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 
 // Routes that render standalone, without the personal-site header and footer.
-const bareRoutes = ["/bazi"];
+const bareRoutes = ["/bazi", "/tour_guide"];
 
 export function SiteChrome({ children }) {
   const pathname = usePathname();
