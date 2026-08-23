@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "八字",
+  title: { absolute: "八字" },
   description: "用阳历出生信息生成四柱八字。",
   robots: { index: false, follow: false },
 };

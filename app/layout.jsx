@@ -1,6 +1,5 @@
 import { Inter, Playfair_Display } from "next/font/google";
-import { Header } from "@/components/sections/Header";
-import { Footer } from "@/components/sections/Footer";
+import { SiteChrome } from "@/components/sections/SiteChrome";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,9 +36,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans">
-        <Header />
-        <main className="min-h-screen pt-16">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
