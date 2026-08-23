@@ -171,7 +171,7 @@ export default function BaziPage() {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[40vh] bg-gradient-to-b from-cream via-sage-50 to-transparent"
       />
 
-      <section className="container-narrow pt-16 pb-10">
+      <section className="container-narrow pt-10 pb-10">
         <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">
           BaZi · 四柱八字
         </p>
@@ -180,15 +180,6 @@ export default function BaziPage() {
             八字排盘
           </h1>
           <div className="flex flex-wrap gap-2">
-            <a
-              href="/bazi/reference"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-              title="在新标签页打开，不影响当前排盘"
-            >
-              命理参考 ↗
-            </a>
             <Link
               href={pairHref}
               className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"

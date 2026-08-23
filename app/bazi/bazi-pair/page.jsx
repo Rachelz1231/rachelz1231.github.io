@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import {
   calculateBazi,
   BIRTH_PLACES,
@@ -122,7 +121,7 @@ export default function BaziPairPage() {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[40vh] bg-gradient-to-b from-cream via-sage-50 to-transparent"
       />
 
-      <section className="container-narrow pt-16 pb-10">
+      <section className="container-narrow pt-10 pb-10">
         <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">
           BaZi · 合盘
         </p>
@@ -130,12 +129,6 @@ export default function BaziPairPage() {
           <h1 className="font-serif text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             八字合盘
           </h1>
-          <Link
-            href="/bazi"
-            className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            ← 返回排盘
-          </Link>
         </div>
         <p className="mt-4 max-w-2xl text-muted-foreground">
           分别填入两人阳历出生信息，自动按真太阳时排出双方四柱，并列出两盘之间的合冲刑害。
