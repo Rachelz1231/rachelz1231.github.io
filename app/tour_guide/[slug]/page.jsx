@@ -31,6 +31,47 @@ function DayLegs({ legs }) {
   );
 }
 
+function FlexibleBlock({ flexible }) {
+  return (
+    <section className="mt-8 rounded-lg border border-dashed border-border bg-muted/30 px-5 py-4">
+      <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        机动项 · 还没定在哪天
+      </p>
+      <ul className="mt-3 space-y-2">
+        {flexible.map((entry) => (
+          <li key={entry.title}>
+            <p className="text-sm font-medium text-foreground">{entry.title}</p>
+            {entry.note ? (
+              <p className="mt-0.5 text-sm text-muted-foreground">{entry.note}</p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function DayOptions({ options }) {
+  return (
+    <div className="mt-4">
+      <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        二选一{options.note ? ` · ${options.note}` : ""}
+      </p>
+      <div className="mt-2 grid gap-3 sm:grid-cols-2">
+        {options.choices.map((choice) => (
+          <div
+            key={choice.label}
+            className="rounded-md border border-border/80 px-4 py-3"
+          >
+            <p className="text-sm font-medium text-foreground">{choice.label}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{choice.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DayTips({ tips }) {
   return (
     <div className="mt-4 rounded-md bg-muted/60 px-4 py-3">
@@ -68,6 +109,8 @@ export default function TourPage({ params }) {
       <p className="mt-2 text-sm text-muted-foreground">{tour.dates}</p>
       <p className="mt-4 max-w-2xl text-muted-foreground">{tour.summary}</p>
 
+      {tour.flexible?.length ? <FlexibleBlock flexible={tour.flexible} /> : null}
+
       <ol className="mt-10 space-y-10">
         {tour.days.map((day) => (
           <li key={day.label} className="border-l-2 border-border pl-5">
@@ -84,6 +127,10 @@ export default function TourPage({ params }) {
             </h2>
 
             {day.legs?.length ? <DayLegs legs={day.legs} /> : null}
+
+            {day.options?.choices?.length ? (
+              <DayOptions options={day.options} />
+            ) : null}
 
             {day.items?.length ? (
               <ul className="mt-3 space-y-1.5">
