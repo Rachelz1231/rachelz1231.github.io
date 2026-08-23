@@ -48,6 +48,18 @@ function DayLegs({ legs }) {
   );
 }
 
+// 管住整趟行程的约束，排在最上面 —— 它决定每天几点出发，不是某一天的事。
+function Notice({ notice }) {
+  return (
+    <section className="mt-6 rounded-lg border-l-4 border-primary bg-accent/40 px-5 py-4">
+      <p className="text-sm font-medium text-foreground">{notice.title}</p>
+      {notice.detail ? (
+        <p className="mt-1 text-sm text-muted-foreground">{notice.detail}</p>
+      ) : null}
+    </section>
+  );
+}
+
 function FlexibleBlock({ flexible }) {
   return (
     <section className="mt-8 rounded-lg border border-dashed border-border bg-muted/30 px-5 py-4">
@@ -147,6 +159,8 @@ export default function TourPage({ params }) {
       </div>
       <p className="mt-2 text-sm text-muted-foreground">{tour.dates}</p>
       <p className="mt-4 max-w-2xl text-muted-foreground">{tour.summary}</p>
+
+      {tour.notice ? <Notice notice={tour.notice} /> : null}
 
       {tour.map ? <RouteImage map={tour.map} /> : null}
 
