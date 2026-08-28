@@ -8,7 +8,8 @@
     --screenshot=public/tour_guide/altay-route.png \
     "file://$PWD/scripts/altay-route.html"
 
-  点位是按实际方位摆的示意图，不是等比例地图。
+  点位是按实际方位摆的示意图，不是等比例地图。环线本身是闭合的，
+  走向由顶部那行「行进方向」决定 —— 换方向时改文字和各段标注即可，点位不动。
 -->
 <html lang="zh">
 <head><meta charset="utf-8">
@@ -16,11 +17,11 @@
   html,body { margin:0; padding:0; background:#FDFDF7; }
   svg { display:block; font-family:"PingFang SC","Helvetica Neue",sans-serif; }
   .stop  { font-size:17px; font-weight:600; fill:#1F2314; }
-  .aside { font-size:15px; font-weight:500; fill:#62675B; }
   .leg   { font-size:13px; fill:#5C6B38; }
   .hint  { font-size:12px; fill:#8A8F80; }
   .title { font-size:20px; font-weight:600; fill:#1F2314; }
   .sub   { font-size:13px; fill:#8A8F80; }
+  .dir   { font-size:13px; font-weight:500; fill:#5C6B38; }
 </style></head>
 <body>
 <svg width="1000" height="620" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
@@ -28,19 +29,13 @@
 
   <text class="title" x="56" y="60">新疆阿勒泰环线</text>
   <text class="sub"   x="56" y="84">2026-09-05 – 09-11 · 自驾 · 全程约 655 km</text>
+  <text class="dir"   x="56" y="106">行进方向：阿勒泰 → 禾木 → 喀纳斯 → 白哈巴 → 布尔津 → 阿勒泰</text>
 
   <!-- 环线 -->
   <polyline
-    points="810,450 355,530 325,455 178,205 205,145 330,225 530,175 810,450"
+    points="810,450 355,530 325,455 178,205 205,145 330,225 455,160 530,175 810,450"
     fill="none" stroke="#5C6B38" stroke-width="3"
     stroke-linejoin="round" stroke-linecap="round"/>
-
-  <!-- 喀纳斯：从白哈巴坐大巴进景区，不是自驾段，用虚线区分 -->
-  <line x1="205" y1="145" x2="360" y2="108"
-        stroke="#9AA487" stroke-width="2" stroke-dasharray="5 5"/>
-  <circle cx="360" cy="108" r="6" fill="#FDFDF7" stroke="#9AA487" stroke-width="2"/>
-  <text class="aside" x="376" y="108" text-anchor="start" dominant-baseline="middle">喀纳斯景区</text>
-  <text class="hint"  x="278" y="112" text-anchor="middle">大巴 1h</text>
 
   <!-- 途经点 -->
   <circle cx="355" cy="530" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
@@ -48,6 +43,7 @@
   <circle cx="178" cy="205" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
   <circle cx="205" cy="145" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
   <circle cx="330" cy="225" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
+  <circle cx="455" cy="160" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
   <circle cx="530" cy="175" r="6" fill="#FDFDF7" stroke="#5C6B38" stroke-width="2.5"/>
   <!-- 起点 / 终点 -->
   <circle cx="810" cy="450" r="8" fill="#5C6B38"/>
@@ -58,18 +54,21 @@
   <text class="stop" x="303" y="455" text-anchor="end" dominant-baseline="middle">五彩滩</text>
   <text class="stop" x="156" y="205" text-anchor="end" dominant-baseline="middle">中哈边境大峡谷</text>
   <text class="stop" x="205" y="122" text-anchor="middle">白哈巴</text>
+  <text class="stop" x="436" y="136" text-anchor="middle">喀纳斯</text>
   <text class="stop" x="330" y="252" text-anchor="middle">铁热克提乡</text>
-  <text class="hint" x="330" y="270" text-anchor="middle">中国石油铁热克提加油站 · 此后至阿勒泰无油</text>
+  <text class="hint" x="330" y="270" text-anchor="middle">中国石油铁热克提加油站 · 景区内唯一加油站</text>
   <text class="stop" x="562" y="175" text-anchor="start" dominant-baseline="middle">禾木</text>
 
   <!-- 各段里程 -->
   <text class="leg" x="582" y="514" text-anchor="middle">106 km · 1h22</text>
   <text class="leg" x="368" y="497" text-anchor="start">22 km · 23min</text>
   <text class="leg" x="272" y="338" text-anchor="start">131 km · 2h16</text>
-  <text class="leg" x="212" y="166" text-anchor="start">12 km · 23min</text>
-  <text class="leg" x="300" y="190" text-anchor="start">42 km · 56min</text>
-  <text class="leg" x="443" y="222" text-anchor="middle">109 km · 2h22</text>
+  <text class="leg" x="184" y="180" text-anchor="end">12 km · 23min</text>
+  <text class="leg" x="252" y="158" text-anchor="start">42 km · 56min</text>
+  <text class="leg" x="402" y="212" text-anchor="start">约 72 km</text>
+  <text class="leg" x="494" y="152" text-anchor="start">约 37 km</text>
+  <text class="hint" x="402" y="230" text-anchor="start">铁贾公路全段 109 km</text>
   <text class="leg" x="692" y="318" text-anchor="start">233 km · 走走停停 6 小时</text>
-  <text class="hint" x="692" y="336" text-anchor="start">反穿阿禾公路</text>
+  <text class="hint" x="692" y="336" text-anchor="start">阿禾公路（正穿）</text>
 </svg>
 </body></html>
