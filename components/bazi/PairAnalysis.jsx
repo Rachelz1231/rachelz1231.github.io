@@ -17,6 +17,7 @@ import { PairSummary } from "./pair/PairSummary";
 import { YongShenPanel } from "./pair/YongShenPanel";
 import { CrossShenshaPanel } from "./pair/CrossShenshaPanel";
 import { RelationshipTimeline } from "./pair/RelationshipTimeline";
+import { BranchWheelPanel } from "./pair/BranchWheelPanel";
 
 // 五合 / 六合 配对（合的"化神"在合盘里只作牵引信号，不评价化）
 const STEM_COMBO_PAIRS = [
@@ -79,6 +80,10 @@ export function PairAnalysis({ resultA, resultB, formA, formB }) {
         nameA={nameA} nameB={nameB}
       />
       <CrossShenshaPanel
+        resultA={resultA} resultB={resultB}
+        nameA={nameA} nameB={nameB}
+      />
+      <BranchWheelPanel
         resultA={resultA} resultB={resultB}
         nameA={nameA} nameB={nameB}
       />
