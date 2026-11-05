@@ -12,8 +12,9 @@ const NORMAL_GE = [
 ];
 
 const SPECIAL_GE = [
-  { name: "建禄格",   desc: "月支本气=日主比肩；身强格之首，依透干分多种用神" },
-  { name: "羊刃格",   desc: "月支为日主刃位（劫财）；阳干见之最烈，宜配煞印" },
+  { name: "建禄格",   desc: "月支为日主禄位；身强格之首，依透干分多种用神" },
+  { name: "羊刃格",   desc: "阳干月支为刃位（劫财）；最烈，宜配煞印" },
+  { name: "月劫格",   desc: "阴干月支为劫财禄位（乙寅、丁己巳、辛申、癸亥）；同建禄论" },
 ];
 
 const WAI_GE = [
@@ -29,9 +30,9 @@ export function GeJuOverview() {
       <div>
         <h3 className="font-medium text-foreground">取格次第</h3>
         <ol className="mt-1 list-decimal space-y-1 pl-5 text-muted-foreground">
-          <li>月支本气是日主比肩 → 建禄；为日主刃位 → 羊刃。两者优先定格。</li>
+          <li>月支为日主禄位 → 建禄；阳干为刃位 → 羊刃；阴干为劫财禄位 → 月劫。三者优先定格。</li>
           <li>月支本气透干 → 以本气十神为格（八格）。</li>
-          <li>本气不透 → 看中气、余气是否透出，取其十神为格。</li>
+          <li>本气不透 → 看中气、余气是否透出，取其十神为格；比劫不能为格，透出也不取。</li>
           <li>都不透 → 本气十神虚立为格（"暗格"），再看用神补救。</li>
           <li>满足"从"或"化"的条件 → 跳出八格，按外格论。</li>
         </ol>
