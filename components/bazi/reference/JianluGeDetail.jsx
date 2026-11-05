@@ -67,7 +67,7 @@ export function JianluGeDetail() {
       <div>
         <h3 className="font-medium text-foreground">什么是建禄格</h3>
         <p className="mt-1 text-muted-foreground">
-          月支本气为日主之比肩，即"<strong>禄位</strong>" — 比劫之最稳。
+          月支为日主的"<strong>禄位</strong>"（临官之地）— 比劫之最稳。
           十干各自禄宫如下：
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
@@ -83,6 +83,11 @@ export function JianluGeDetail() {
             </span>
           ))}
         </div>
+        <p className="mt-2 text-muted-foreground">
+          阴干生在同类阳干的禄位（乙见寅、丁己见巳、辛见申、癸见亥）叫"<strong>月劫</strong>"，与建禄同论。
+          建禄、月劫的月令都是比劫，等于日主自身，书上说"建禄月劫，非格也"——
+          名字只表明月令帮身，真正的格局要看年、月、时干透出的财官杀食伤来取用（见下方六种）。
+        </p>
       </div>
 
       <div>
